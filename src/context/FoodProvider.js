@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
 
 function FoodProvider({ children }) {
+  const [food, setFood] = useState([]);
+  const [drink, setDrink] = useState([]);
+  const [route, setRoute] = useState('food');
   const contextValue = {
-    algo: 2,
+    food,
+    setFood,
+    drink,
+    setDrink,
+    route,
+    setRoute,
   };
 
   return (
