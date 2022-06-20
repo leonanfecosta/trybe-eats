@@ -13,6 +13,7 @@ import ExploreFoodsNacionalities from './pages/explore/ExploreFoodsNacionalities
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import FoodProvider from './context/FoodProvider';
+import NotFound from './pages/NotFound';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+          <Route exact path="/explore/drinks/nationalities" component={ NotFound } />
         </Switch>
         {/* <div className="meals">
         <span className="logo">TRYBE</span>
