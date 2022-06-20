@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import SearchBar from './SearchBar';
+import profileIcon from '../images/profileIcon.svg';
+import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
   const { title } = props;
-  const [redirect, setRedirect] = useState('');
-  const [buttonVisible, setbuttonVisible] = useState(true);
+  const history = useHistory();
+  const [buttonVisible, setbuttonVisible] = useState(false);
 
-  switch (redirect) {
-  case 'profile':
-    return <Redirect to="/profile" />;
+  return (
+    <div>
+      <button
+        type="button"
+        data-testids="profile-top-btn"
+        onClick={ () => history.push('/profile') }
+      >
+        {profileIcon}
 
-  default:
-    return (
-      <div>
-        <button
-          type="button"
-          data-testids="profile-top-btn"
-          onClick={ () => setRedirect('profile') }
-        >
-          Ok
+      </button>
+      <title data-testids="page-title">{title}</title>
+      <button
+        type="button"
+        data-testid="search-input"
+        onClick={ () => setbuttonVisible(!buttonVisible) }
+      >
+        {searchIcon}
 
-        </button>
-        <title data-testids="page-title">{title}</title>
-        <button
-          type="button"
-          data-testid="search-input"
-          onClick={ () => setbuttonVisible(!buttonVisible) }
-        >
-          Busca
-
-        </button>
-      </div>
-    );
-  }
+      </button>
+      {buttonVisible && <SearchBar />}
+    </div>
+  );
 }
 
 Header.propTypes = {
