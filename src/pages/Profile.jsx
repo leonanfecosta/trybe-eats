@@ -20,7 +20,7 @@ function Profile() {
     <div>
       <h2>Profile</h2>
       <h1 data-testid="profile-email">
-        { profileEmail.email }
+        { profileEmail ? profileEmail.email : 'Email não informado' }
       </h1>
       <Link to="/done-recipes">
         <button
