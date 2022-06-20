@@ -6,7 +6,7 @@ import mealIcon from '../images/mealIcon.svg';
 import './Footer.css';
 
 function Footer() {
-  const [redirect, setRedirect] = useState(null);
+  const [redirect, setRedirect] = useState('');
 
   // Solução do redirect com Switch proveniente da monitoria com o instrutor Moisés Santana e Ander
   switch (redirect) {
