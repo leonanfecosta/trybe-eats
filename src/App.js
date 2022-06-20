@@ -16,11 +16,13 @@ import FoodProvider from './context/FoodProvider';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <main>
       <FoodProvider>
+        <SearchBar />
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route exact path="/foods" component={ Foods } />
