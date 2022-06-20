@@ -4,7 +4,7 @@ import FoodContext from './FoodContext';
 
 function FoodProvider({ children }) {
   const contextValue = {
-    algo: 1,
+    algo: 2,
   };
 
   return (
