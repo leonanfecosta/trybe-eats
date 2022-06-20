@@ -8,6 +8,7 @@ import './Footer.css';
 function Footer() {
   const [redirect, setRedirect] = useState(null);
 
+  // Solução do redirect com Switch proveniente da monitoria com o instrutor Moisés Santana e Ander
   switch (redirect) {
   case 'drinks':
     return <Redirect to="/drinks" />;
