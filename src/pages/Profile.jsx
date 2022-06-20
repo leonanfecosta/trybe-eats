@@ -1,12 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 function Profile() {
+  const history = useHistory();
+
+  const [profileEmail, setProfileEmail] = useState('');
+
+  useEffect(() => {
+    setProfileEmail(JSON.parse(localStorage.getItem('user')));
+  }, []);
+
+  const logoutBtn = (event) => {
+    event.preventDefault();
+    history.push('/');
+    localStorage.clear();
+  };
+
   return (
     <div>
       <h2>Profile</h2>
       <h1 data-testid="profile-email">
-        Email
+        { profileEmail.email }
       </h1>
       <Link to="/done-recipes">
         <button
@@ -27,6 +41,7 @@ function Profile() {
       <button
         data-testid="profile-logout-btn"
         type="button"
+        onClick={ logoutBtn }
       >
         Logout
       </button>
