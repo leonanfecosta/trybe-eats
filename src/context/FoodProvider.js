@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
-import { getMeals } from '../services/mealApi';
-import { getDrinks } from '../services/drinkApi';
+import { getMeals, getMealsCategories } from '../services/mealApi';
+import { getDrinks, getDrinksCategories } from '../services/drinkApi';
 
 function FoodProvider({ children }) {
   const [foods, setFood] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [route, setRoute] = useState('food');
+  const [foodsCategories, setFoodCategories] = useState([]);
+  const [drinksCategories, setDrinksCategories] = useState([]);
 
   const fetchMeals = async () => {
     const meals = await getMeals();
@@ -19,9 +21,21 @@ function FoodProvider({ children }) {
     setDrinks(drinksData);
   };
 
+  const fetchDrinksCategories = async () => {
+    const drinksCategoriesData = await getDrinksCategories();
+    setDrinksCategories(drinksCategoriesData);
+  };
+
+  const fetchFoodsCategories = async () => {
+    const foodsCategoriesData = await getMealsCategories();
+    setFoodCategories(foodsCategoriesData);
+  };
+
   useEffect(() => {
     fetchMeals();
     fetchDrinks();
+    fetchFoodsCategories();
+    fetchDrinksCategories();
   }, []);
 
   const contextValue = {
@@ -31,6 +45,8 @@ function FoodProvider({ children }) {
     setDrinks,
     route,
     setRoute,
+    foodsCategories,
+    drinksCategories,
   };
 
   return (

@@ -3,13 +3,25 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
 import CardFood from '../components/cardFood';
+import Buttons from '../components/Buttons';
 
 function Drinks() {
-  const { drinks } = useContext(FoodContext);
+  const { drinks, drinksCategories } = useContext(FoodContext);
   const NUMBER_OF_DRINKS = 12;
+  const NUMBER_OF_CATEGORIES = 5;
   return (
     <div>
       <Header title="Drinks" showButton route="drink" />
+      {
+        drinksCategories && drinksCategories
+          .slice(0, NUMBER_OF_CATEGORIES).map((categories) => (
+            <Buttons
+              key={ categories.strCategory }
+              name={ categories.strCategory }
+              dataTestid={ `${categories.strCategory}-category-filter` }
+            />))
+
+      }
       { drinks && drinks.slice(0, NUMBER_OF_DRINKS).map((drink, index) => (
         <CardFood
           key={ drink.idDrink }
