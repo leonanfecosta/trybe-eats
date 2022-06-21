@@ -30,3 +30,14 @@ export const getDrinkByFirstLetter = async (letter) => {
     console.log(error);
   }
 };
+
+export const getDrinks = async () => {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s';
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    console.log(error);
+  }
+};
