@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 function ExploreFoods() {
   return (
     <div>
-      <h2>Explore Foods</h2>
+      <Header title="Explore Foods" showButton={ false } />
       <Link to="/explore/foods/ingredients">
         <button type="button" data-testid="explore-by-ingredient">By Ingredient</button>
       </Link>
@@ -14,6 +16,7 @@ function ExploreFoods() {
       <Link to="/">
         <button type="button" data-testid="explore-surprise">Surprise me!</button>
       </Link>
+      <Footer />
     </div>
   );
 }

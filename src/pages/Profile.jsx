@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Profile() {
   const history = useHistory();
-
   const [profileEmail, setProfileEmail] = useState('');
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function Profile() {
 
   return (
     <div>
-      <h2>Profile</h2>
+      <Header title="Profile" />
       <h1 data-testid="profile-email">
         { profileEmail ? profileEmail.email : 'Email não informado' }
       </h1>
@@ -45,6 +46,7 @@ function Profile() {
       >
         Logout
       </button>
+      <Footer />
     </div>
   );
 }

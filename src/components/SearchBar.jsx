@@ -91,6 +91,7 @@ function SearchBar() {
       <input
         type="text"
         placeholder="Search Recipes"
+        data-testid="search-input"
         name="search-input"
         value={ searchInput }
         onChange={ ({ target }) => setSearchInput(target.value) }
