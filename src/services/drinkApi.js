@@ -24,8 +24,8 @@ export const getDrinkByFirstLetter = async (letter) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
   try {
     const response = await fetch(URL);
-    const data = await response.json();
-    return data.drinks;
+    const { drinks } = await response.json();
+    return drinks;
   } catch (error) {
     console.log(error);
   }
