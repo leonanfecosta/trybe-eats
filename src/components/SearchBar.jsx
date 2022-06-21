@@ -21,13 +21,13 @@ function SearchBar() {
 
   const verifyFood = (food) => {
     if (food && food.length === 1) {
-      history.push(`/foods$/${food[0].idMeal}`);
+      history.push(`/foods/${food[0].idMeal}`);
     }
   };
 
   const verifyDrink = (drink) => {
-    if (drink.length === 1) {
-      history.push(`/drinks$/${drink[0].idDrink}`);
+    if (drink && drink.length === 1) {
+      history.push(`/drinks/${drink[0].idDrink}`);
     }
   };
 

@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import FoodContext from '../context/FoodContext';
 
 function Header(props) {
-  const { title, showButton } = props;
+  const { title, showButton, route } = props;
   const history = useHistory();
   const [buttonVisible, setbuttonVisible] = useState(false);
+  const { setRoute } = useContext(FoodContext);
+
+  useEffect(() => {
+    setRoute(route);
+  }, []);
 
   return (
     <div>
@@ -35,6 +41,7 @@ function Header(props) {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   showButton: PropTypes.bool.isRequired,
+  route: PropTypes.string.isRequired,
 };
 
 export default Header;
