@@ -14,6 +14,9 @@ function Drinks() {
         <CardFood
           key={ drink.idDrink }
           food={ drink }
+          srcImg={ drink.strDrinkThumb }
+          alt={ drink.strDrink }
+          name={ drink.strDrink }
           dataTestIdCard={ `${index}-recipe-card` }
           dataTestIdImg={ `${index}-card-img` }
           dataTestIdName={ `${index}-card-name` }

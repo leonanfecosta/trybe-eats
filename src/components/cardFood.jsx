@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './cardFood.module.css';
 
-function CardFood({ food, dataTestIdCard, dataTestIdImg, dataTestIdName }) {
+function CardFood({ dataTestIdCard, dataTestIdImg, dataTestIdName, srcImg, alt, name }) {
   return (
     <div data-testid={ dataTestIdCard } className={ styles.cardFood }>
-      <p data-testid={ dataTestIdName }>{ food.strMeal }</p>
+      <p data-testid={ dataTestIdName }>{ name }</p>
       <img
-        src={ food.strMealThumb }
-        alt={ food.strMeal }
+        src={ srcImg }
+        alt={ alt }
         data-testid={ dataTestIdImg }
       />
     </div>
@@ -16,10 +16,12 @@ function CardFood({ food, dataTestIdCard, dataTestIdImg, dataTestIdName }) {
 }
 
 CardFood.propTypes = {
-  food: PropTypes.objectOf(PropTypes.any).isRequired,
   dataTestIdCard: PropTypes.string.isRequired,
   dataTestIdImg: PropTypes.string.isRequired,
   dataTestIdName: PropTypes.string.isRequired,
+  srcImg: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default CardFood;
