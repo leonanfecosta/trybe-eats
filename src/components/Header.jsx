@@ -12,24 +12,22 @@ function Header(props) {
 
   return (
     <div>
-      <button
-        type="button"
-        data-testids="profile-top-btn"
+      <input
+        type="image"
+        data-testid="profile-top-btn"
         onClick={ () => history.push('/profile') }
-      >
-        {profileIcon}
-
-      </button>
-      <title data-testids="page-title">{title}</title>
-      <button
-        type="button"
-        data-testid="search-input"
+        src={ profileIcon }
+        alt="profileIcon"
+      />
+      <h3 data-testid="page-title">{title}</h3>
+      <input
+        type="image"
+        data-testid="search-top-btn"
         onClick={ () => setbuttonVisible(!buttonVisible) }
-      >
-        {searchIcon}
-
-      </button>
-      {buttonVisible && <SearchBar />}
+        src={ searchIcon }
+        alt="searchIcon"
+      />
+      { buttonVisible && <SearchBar /> }
     </div>
   );
 }
