@@ -1,4 +1,4 @@
-export const getFoodFromIngredient = async (ingredient) => {
+export const getFoodByIngredient = async (ingredient) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   try {
     const response = await fetch(URL);
@@ -9,7 +9,7 @@ export const getFoodFromIngredient = async (ingredient) => {
   }
 };
 
-export const getFoodFromName = async (name) => {
+export const getFoodByName = async (name) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   try {
     const response = await fetch(URL);
@@ -19,7 +19,7 @@ export const getFoodFromName = async (name) => {
     console.log(error);
   }
 };
-export const getFoodFromFirstLetter = async (letter) => {
+export const getFoodByFirstLetter = async (letter) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
   try {
     const response = await fetch(URL);
