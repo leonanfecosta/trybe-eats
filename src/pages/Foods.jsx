@@ -6,9 +6,10 @@ import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 
 function Foods() {
-  const { foods, foodsCategories } = useContext(FoodContext);
+  const { foods, foodsCategories, fetchFoodsByCategory } = useContext(FoodContext);
   const NUMBER_OF_FOODS = 12;
   const NUMBER_OF_CATEGORIES = 5;
+
   return (
     <div>
       <Header title="Foods" showButton route="food" />
@@ -19,8 +20,8 @@ function Foods() {
               key={ categories.strCategory }
               name={ categories.strCategory }
               dataTestid={ `${categories.strCategory}-category-filter` }
+              onClick={ ({ target }) => fetchFoodsByCategory(target.name) }
             />))
-
       }
       { foods && foods.slice(0, NUMBER_OF_FOODS).map((food, index) => (
         <CardFood

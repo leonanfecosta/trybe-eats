@@ -51,3 +51,14 @@ export const getMealsCategories = async () => {
     console.log(error);
   }
 };
+
+export const getMealsByCategory = async (category) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};

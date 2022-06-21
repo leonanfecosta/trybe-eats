@@ -6,7 +6,7 @@ import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 
 function Drinks() {
-  const { drinks, drinksCategories } = useContext(FoodContext);
+  const { drinks, drinksCategories, fetchDrinksByCategory } = useContext(FoodContext);
   const NUMBER_OF_DRINKS = 12;
   const NUMBER_OF_CATEGORIES = 5;
   return (
@@ -19,6 +19,7 @@ function Drinks() {
               key={ categories.strCategory }
               name={ categories.strCategory }
               dataTestid={ `${categories.strCategory}-category-filter` }
+              onClick={ ({ target }) => fetchDrinksByCategory(target.name) }
             />))
 
       }

@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
-import { getMeals, getMealsCategories } from '../services/mealApi';
-import { getDrinks, getDrinksCategories } from '../services/drinkApi';
+import {
+  getMeals,
+  getMealsCategories,
+  getMealsByCategory,
+} from '../services/mealApi';
+import {
+  getDrinks,
+  getDrinksCategories,
+  getDrinksByCategory,
+} from '../services/drinkApi';
 
 function FoodProvider({ children }) {
   const [foods, setFood] = useState([]);
@@ -31,6 +39,16 @@ function FoodProvider({ children }) {
     setFoodCategories(foodsCategoriesData);
   };
 
+  const fetchFoodsByCategory = async (category) => {
+    const foodsData = await getMealsByCategory(category);
+    setFood(foodsData);
+  };
+
+  const fetchDrinksByCategory = async (category) => {
+    const drinksData = await getDrinksByCategory(category);
+    setDrinks(drinksData);
+  };
+
   useEffect(() => {
     fetchMeals();
     fetchDrinks();
@@ -47,12 +65,12 @@ function FoodProvider({ children }) {
     setRoute,
     foodsCategories,
     drinksCategories,
+    fetchFoodsByCategory,
+    fetchDrinksByCategory,
   };
 
   return (
-    <FoodContext.Provider value={ contextValue }>
-      {children}
-    </FoodContext.Provider>
+    <FoodContext.Provider value={ contextValue }>{children}</FoodContext.Provider>
   );
 }
 
