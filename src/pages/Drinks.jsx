@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
+import CardFood from '../components/cardFood';
 
 function Drinks() {
   const { drinks } = useContext(FoodContext);
@@ -9,11 +10,14 @@ function Drinks() {
   return (
     <div>
       <Header title="Drinks" showButton route="drink" />
-      { drinks.slice(0, NUMBER_OF_DRINKS).map((drink) => (
-        <div key={ drink.idDrink }>
-          <h3>{ drink.strDrink }</h3>
-          <img src={ drink.strDrinkThumb } alt={ drink.strDrink } />
-        </div>
+      { drinks && drinks.slice(0, NUMBER_OF_DRINKS).map((drink, index) => (
+        <CardFood
+          key={ drink.idDrink }
+          food={ drink }
+          dataTestIdCard={ `${index}-recipe-card` }
+          dataTestIdImg={ `${index}-card-img` }
+          dataTestIdName={ `${index}-card-name` }
+        />
       )) }
       <Footer />
     </div>
