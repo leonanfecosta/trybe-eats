@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 
 function Profile() {
   const history = useHistory();
-
   const [profileEmail, setProfileEmail] = useState('');
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
-  const { title } = props;
+  const { title, showButton } = props;
   const history = useHistory();
   const [buttonVisible, setbuttonVisible] = useState(false);
 
@@ -20,13 +20,13 @@ function Header(props) {
         alt="profileIcon"
       />
       <h3 data-testid="page-title">{title}</h3>
-      <input
+      { showButton && <input
         type="image"
         data-testid="search-top-btn"
         onClick={ () => setbuttonVisible(!buttonVisible) }
         src={ searchIcon }
         alt="searchIcon"
-      />
+      />}
       { buttonVisible && <SearchBar /> }
     </div>
   );
@@ -34,6 +34,7 @@ function Header(props) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  showButton: PropTypes.bool.isRequired,
 };
 
 export default Header;

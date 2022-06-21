@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 function ExploreFoods() {
   return (
     <div>
-      <Header title="Explore Foods" />
+      <Header title="Explore Foods" showButton={ false } />
       <Link to="/explore/foods/ingredients">
         <button type="button" data-testid="explore-by-ingredient">By Ingredient</button>
       </Link>

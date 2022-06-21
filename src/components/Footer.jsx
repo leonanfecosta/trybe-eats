@@ -10,27 +10,29 @@ function Footer() {
 
   return (
     <footer data-testid="footer">
-      <h2>Footer</h2>
       <input
-        type="button"
+        type="image"
         data-testid="drinks-bottom-btn"
         className="footer-button-icon"
         onClick={ () => history.push('/drinks') }
         src={ drinkIcon }
+        alt="drinkIcon"
       />
       <input
-        type="button"
+        type="image"
         data-testid="explore-bottom-btn"
         className="footer-button-icon"
         onClick={ () => history.push('/explore') }
         src={ exploreIcon }
+        alt="exploreIcon"
       />
       <input
-        type="button"
+        type="image"
         data-testid="food-bottom-btn"
         className="footer-button-icon"
         onClick={ () => history.push('/foods') }
         src={ mealIcon }
+        alt="mealIcon"
       />
     </footer>
   );
