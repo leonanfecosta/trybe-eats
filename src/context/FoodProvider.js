@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
 
 function FoodProvider({ children }) {
-  const [food, setFood] = useState([]);
+  const [foods, setFood] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [route, setRoute] = useState('food');
 
   const contextValue = {
-    food,
+    foods,
     setFood,
     drinks,
     setDrinks,

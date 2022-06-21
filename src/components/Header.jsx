@@ -14,7 +14,7 @@ function Header(props) {
 
   useEffect(() => {
     setRoute(route);
-  }, []);
+  });
 
   return (
     <div>
