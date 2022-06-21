@@ -94,7 +94,6 @@ function SearchBar() {
 
   return (
     <form>
-      <p>{console.log(route)}</p>
       <input
         type="text"
         placeholder="Search Recipes"
