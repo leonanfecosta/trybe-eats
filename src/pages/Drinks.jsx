@@ -6,12 +6,18 @@ import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 
 function Drinks() {
-  const { drinks, drinksCategories, fetchDrinksByCategory } = useContext(FoodContext);
+  const { drinks,
+    drinksCategories, fetchDrinksByCategory, fetchDrinks } = useContext(FoodContext);
   const NUMBER_OF_DRINKS = 12;
   const NUMBER_OF_CATEGORIES = 5;
   return (
     <div>
       <Header title="Drinks" showButton route="drink" />
+      <Buttons
+        name="All"
+        dataTestid="All-btn"
+        onClick={ fetchDrinks }
+      />
       {
         drinksCategories && drinksCategories
           .slice(0, NUMBER_OF_CATEGORIES).map((categories) => (

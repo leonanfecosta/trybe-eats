@@ -67,6 +67,7 @@ function FoodProvider({ children }) {
     drinksCategories,
     fetchFoodsByCategory,
     fetchDrinksByCategory,
+    fetchDrinks,
   };
 
   return (
