@@ -2,17 +2,22 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InputRadio from './InputRadio';
 import {
-  getFoodFromIngredient,
-  getFoodFromName,
-  getFoodFromFirstLetter,
-} from '../services/foodApi';
+  getFoodByIngredient,
+  getFoodByName,
+  getFoodByFirstLetter,
+} from '../services/mealApi';
+import {
+  getDrinkByIngredient,
+  getDrinkByName,
+  getDrinkByFirstLetter,
+} from '../services/drinkApi';
 import FoodContext from '../context/FoodContext';
 
 function SearchBar() {
   const history = useHistory();
   const [searchInput, setSearchInput] = useState('');
   const [searchType, setSearchType] = useState('name');
-  const { setFood, setDrink, route } = useContext(FoodContext);
+  const { setFood, setDrinks, route } = useContext(FoodContext);
 
   const verifyFood = (food) => {
     if (food && food.length === 1) {
@@ -28,7 +33,9 @@ function SearchBar() {
 
   const verifySearch = (search) => {
     if (!search) {
-      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      return global.alert(
+        'Sorry, we haven\'t found any recipes for these filters.',
+      );
     }
   };
 
@@ -37,30 +44,30 @@ function SearchBar() {
     switch (searchType) {
     case 'ingredientSearch':
       if (route === 'food') {
-        const food = await getFoodFromIngredient(searchInput);
+        const food = await getFoodByIngredient(searchInput);
         verifySearch(food);
         verifyFood(food);
         return setFood(food);
       }
       if (route === 'drink') {
-        const drink = await getFoodFromIngredient(searchInput);
+        const drink = await getDrinkByIngredient(searchInput);
         verifySearch(drink);
         verifyDrink(drink);
-        return setDrink(drink);
+        return setDrinks(drink);
       }
       break;
     case 'nameSearch':
       if (route === 'food') {
-        const food = await getFoodFromName(searchInput);
+        const food = await getFoodByName(searchInput);
         verifySearch(food);
         verifyFood(food);
         return setFood(food);
       }
       if (route === 'drink') {
-        const drink = await getFoodFromName(searchInput);
+        const drink = await getDrinkByName(searchInput);
         verifySearch(drink);
         verifyDrink(drink);
-        return setDrink(drink);
+        return setDrinks(drink);
       }
       break;
     case 'firstLetterSearch':
@@ -68,16 +75,16 @@ function SearchBar() {
         return global.alert('Your search must have only 1 (one) character');
       }
       if (route === 'food') {
-        const food = await getFoodFromFirstLetter(searchInput);
+        const food = await getFoodByFirstLetter(searchInput);
         verifySearch(food);
         verifyFood(food);
         return setFood(food);
       }
       if (route === 'drink') {
-        const drink = await getFoodFromFirstLetter(searchInput);
+        const drink = await getDrinkByFirstLetter(searchInput);
         verifySearch(drink);
         verifyDrink(drink);
-        return setDrink(drink);
+        return setDrinks(drink);
       }
       break;
     default:

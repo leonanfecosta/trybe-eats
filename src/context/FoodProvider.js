@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
 
 function FoodProvider({ children }) {
+  const [food, setFood] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+
   const contextValue = {
-    algo: 2,
+    food,
+    setFood,
+    drinks,
+    setDrinks,
   };
 
   return (
