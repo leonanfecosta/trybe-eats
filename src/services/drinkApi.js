@@ -32,7 +32,7 @@ export const getDrinkByFirstLetter = async (letter) => {
 };
 
 export const getDrinks = async () => {
-  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s';
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   try {
     const response = await fetch(URL);
     const data = await response.json();
