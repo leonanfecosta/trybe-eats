@@ -12,6 +12,8 @@ import ExploreDrinksIngredients from './pages/explore/ExploreDrinksIngredients';
 import ExploreFoodsNacionalities from './pages/explore/ExploreFoodsNacionalities';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeDetailsDrinks from './pages/RecipeDetailsDrinks';
+import RecipeDetailsFoods from './pages/RecipeDetailsFoods';
 import FoodProvider from './context/FoodProvider';
 import NotFound from './pages/NotFound';
 // import rockGlass from './images/rockGlass.svg';
@@ -26,6 +28,8 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/foods" component={ Foods } />
           <Route exact path="/drinks" component={ Drinks } />
+          <Route exact path="/drinks/:id" component={ RecipeDetailsDrinks } />
+          <Route exact path="/foods/:id" component={ RecipeDetailsFoods } />
           <Route exact path="/explore" component={ Explore } />
           <Route exact path="/explore/foods" component={ ExploreFoods } />
           <Route exact path="/explore/drinks" component={ ExploreDrinks } />
