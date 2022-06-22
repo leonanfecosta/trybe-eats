@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipeDetails from '../components/RecipeDetails';
 import { getFoodById } from '../services/mealApi';
+import { getDrinkRecommendations } from '../services/drinkApi';
 
 function RecipeDetailsFoods(props) {
   const [meal, setMeal] = useState({});
+  const [drinks, setDrinks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { match: { params: { id } } } = props;
@@ -17,12 +19,20 @@ function RecipeDetailsFoods(props) {
         for (let i = 1; i <= TWENTY; i += 1) {
           const ingredient = `strIngredient${i}`;
           const measure = `strMeasure${i}`;
-          if (recipe[ingredient] !== '' && recipe[measure] !== '') {
+          if (recipe[ingredient] !== ''
+          && recipe[measure] !== ''
+          && recipe[ingredient] !== null
+          && recipe[measure] !== null) {
             recipe.ingredients.push(`${recipe[ingredient]} - ${recipe[measure]}`);
           }
         }
         setMeal(recipe);
       });
+    getDrinkRecommendations().then((response) => {
+      const TOTAL_RECOMENDATIONS = 6;
+      const responseFilter = response.filter((_, index) => index < TOTAL_RECOMENDATIONS);
+      setDrinks(responseFilter);
+    });
   }, [id]);
 
   useEffect(() => {
@@ -43,6 +53,8 @@ function RecipeDetailsFoods(props) {
         instructions={ meal.strInstructions }
         video={ meal.strYoutube }
         ingredients={ meal.ingredients }
+        isMeal
+        recomendation={ drinks }
       />}
 
     </div>

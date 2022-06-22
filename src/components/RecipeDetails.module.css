@@ -1,0 +1,11 @@
+.recipeDetails > aside {
+  align-items: center;
+  display: flex;
+  gap: 1%;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+.recipeImage {
+  width: 30%;
+}
