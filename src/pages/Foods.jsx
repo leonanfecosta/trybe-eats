@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
@@ -6,9 +6,21 @@ import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 
 function Foods() {
-  const { foods, foodsCategories, fetchFoodsByCategory } = useContext(FoodContext);
+  const [filter, setFilter] = useState(true);
+  const { foods,
+    foodsCategories,
+    fetchFoodsByCategory,
+    fetchMeals } = useContext(FoodContext);
   const NUMBER_OF_FOODS = 12;
   const NUMBER_OF_CATEGORIES = 5;
+
+  const handleFilter = (name) => {
+    setFilter(!filter);
+    if (filter) {
+      return fetchFoodsByCategory(name);
+    }
+    return fetchMeals();
+  };
 
   return (
     <div>
@@ -20,7 +32,7 @@ function Foods() {
               key={ categories.strCategory }
               name={ categories.strCategory }
               dataTestid={ `${categories.strCategory}-category-filter` }
-              onClick={ ({ target }) => fetchFoodsByCategory(target.name) }
+              onClick={ ({ target }) => handleFilter(target.name) }
             />))
       }
       { foods && foods.slice(0, NUMBER_OF_FOODS).map((food, index) => (

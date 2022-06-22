@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
@@ -6,18 +6,23 @@ import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 
 function Drinks() {
+  const [filter, setFilter] = useState(true);
   const { drinks,
     drinksCategories, fetchDrinksByCategory, fetchDrinks } = useContext(FoodContext);
   const NUMBER_OF_DRINKS = 12;
   const NUMBER_OF_CATEGORIES = 5;
+
+  const handleFilter = (name) => {
+    setFilter(!filter);
+    if (filter) {
+      return fetchDrinksByCategory(name);
+    }
+    return fetchDrinks();
+  };
+
   return (
     <div>
       <Header title="Drinks" showButton route="drink" />
-      <Buttons
-        name="All"
-        dataTestid="All-btn"
-        onClick={ fetchDrinks }
-      />
       {
         drinksCategories && drinksCategories
           .slice(0, NUMBER_OF_CATEGORIES).map((categories) => (
@@ -25,7 +30,7 @@ function Drinks() {
               key={ categories.strCategory }
               name={ categories.strCategory }
               dataTestid={ `${categories.strCategory}-category-filter` }
-              onClick={ ({ target }) => fetchDrinksByCategory(target.name) }
+              onClick={ ({ target }) => handleFilter(target.name) }
             />))
 
       }
