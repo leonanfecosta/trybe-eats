@@ -15,7 +15,7 @@ function RecipeDetailsDrinks(props) {
     getDrinkById(id)
       .then((recipe) => {
         recipe.ingredients = [];
-        const TWENTY = 15;
+        const TWENTY = 20;
         for (let i = 1; i <= TWENTY; i += 1) {
           const ingredient = `strIngredient${i}`;
           const measure = `strMeasure${i}`;
