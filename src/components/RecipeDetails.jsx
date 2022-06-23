@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import RecomendationsCard from './RecomendationsCard';
 import styles from './RecipeDetails.module.css';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function RecipeDetails({
   name,
@@ -16,6 +21,9 @@ function RecipeDetails({
 }) {
   const [isDoneRecipe, setIsDoneRecipe] = useState(false);
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
+  const [wasCopied, setWasCopied] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     // localStorage.setItem('inProgressRecipes', JSON.stringify({
@@ -49,8 +57,29 @@ function RecipeDetails({
       />
       <h4 data-testid="recipe-title">{ name }</h4>
       <p data-testid="recipe-category">{ category }</p>
-      <button data-testid="share-btn" type="button">Share</button>
-      <button data-testid="favorite-btn" type="button">Favorite</button>
+
+      <input
+        type="image"
+        data-testid="favorite-btn"
+        // onClick={}
+        src={ whiteHeartIcon }
+        // src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+        alt="shareIcon"
+      />
+
+      <input
+        type="image"
+        data-testid="share-btn"
+        onClick={ () => {
+          console.log(history);
+          copy(`http://localhost:3000${history.location.pathname}`);
+          setWasCopied(true);
+        } }
+        src={ shareIcon }
+        alt="shareIcon"
+      />
+      {wasCopied && <p>Link copied!</p>}
+
       <h4>Ingredients</h4>
       <ul>
         {ingredients.map((ingredient, index) => (
@@ -101,6 +130,13 @@ function RecipeDetails({
           data-testid="start-recipe-btn"
           type="button"
           className={ styles.buttonStartRecipe }
+          onClick={ () => {
+            if (isMeal) {
+              history.push(`/foods/${id}/in-progress`);
+            } else {
+              history.push(`/drinks/${id}/in-progress`);
+            }
+          } }
         >
           Start Recipe
         </button>
