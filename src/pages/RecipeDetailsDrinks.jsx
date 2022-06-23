@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipeDetails from '../components/RecipeDetails';
 import { getDrinkById } from '../services/drinkApi';
-import { getFoodRecommendations } from '../services/mealApi';
+import { getMeals } from '../services/mealApi';
 
 function RecipeDetailsDrinks(props) {
   const [drink, setDrink] = useState({});
@@ -30,7 +30,7 @@ function RecipeDetailsDrinks(props) {
         }
         setDrink(recipe);
       });
-    getFoodRecommendations().then((response) => {
+    getMeals().then((response) => {
       const TOTAL_RECOMENDATIONS = 6;
       const responseFilter = response.filter((_, index) => index < TOTAL_RECOMENDATIONS);
       setMeals(responseFilter);

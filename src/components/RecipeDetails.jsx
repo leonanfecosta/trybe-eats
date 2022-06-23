@@ -30,7 +30,6 @@ function RecipeDetails({
     //   && inProgressRecipeStorage.some((recipe) => recipe.id === id)) {
     //     setIsDoneRecipe(true);
     //   }
-
   }, [id]);
 
   return (

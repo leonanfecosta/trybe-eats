@@ -2,16 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './cardFood.module.css';
 
-function CardFood({ dataTestIdCard, dataTestIdImg, dataTestIdName, srcImg, alt, name }) {
+function CardFood({
+  dataTestIdCard,
+  dataTestIdImg,
+  dataTestIdName,
+  srcImg,
+  alt,
+  name,
+  route,
+  id,
+}) {
+  const verifyRoute = () => {
+    if (route === 'food') {
+      return `/foods/${id}`;
+    }
+    if (route === 'drink') {
+      return `/drinks/${id}`;
+    }
+  };
+
   return (
-    <div data-testid={ dataTestIdCard } className={ styles.cardFood }>
-      <p data-testid={ dataTestIdName }>{ name }</p>
-      <img
-        src={ srcImg }
-        alt={ alt }
-        data-testid={ dataTestIdImg }
-      />
-    </div>
+    <a href={ verifyRoute() }>
+      <div data-testid={ dataTestIdCard } className={ styles.cardFood }>
+        <p data-testid={ dataTestIdName }>{name}</p>
+        <img src={ srcImg } alt={ alt } data-testid={ dataTestIdImg } />
+      </div>
+    </a>
   );
 }
 
@@ -22,6 +38,8 @@ CardFood.propTypes = {
   srcImg: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default CardFood;
