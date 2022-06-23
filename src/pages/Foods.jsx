@@ -25,7 +25,7 @@ function Foods() {
       }
     };
     handleCategory();
-  }, [filter, fetchFoodsByCategory, fetchMeals, previousCategory]);
+  }, [filter]);
 
   const handleFilter = (name) => {
     if (name !== filter) {

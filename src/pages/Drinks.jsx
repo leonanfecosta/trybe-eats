@@ -27,7 +27,7 @@ function Drinks() {
       }
     };
     handleCategory();
-  }, [filter, fetchDrinksByCategory, fetchDrinks, previousCategory]);
+  }, [filter]);
 
   const handleFilter = (name) => {
     if (name !== filter) {
