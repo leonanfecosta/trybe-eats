@@ -67,7 +67,6 @@ function App() {
       </div> */}
         </FoodProvider>
       </UserProvider>
-
     </main>
   );
 }
