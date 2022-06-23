@@ -22,7 +22,9 @@ function RecipeDetailsDrinks(props) {
           if (recipe[ingredient] !== ''
           && recipe[measure] !== ''
           && recipe[ingredient] !== null
-          && recipe[measure] !== null) {
+          && recipe[measure] !== null
+          && recipe[ingredient] !== undefined
+          && recipe[measure] !== undefined) {
             recipe.ingredients.push(`${recipe[ingredient]} - ${recipe[measure]}`);
           }
         }
@@ -55,6 +57,7 @@ function RecipeDetailsDrinks(props) {
         ingredients={ drink.ingredients }
         isMeal={ false }
         recomendation={ meals }
+        id={ drink.idDrink }
       />}
 
     </div>

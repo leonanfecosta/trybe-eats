@@ -9,3 +9,8 @@
 .recipeImage {
   width: 30%;
 }
+
+.buttonStartRecipe {
+  bottom: 0;
+  position: fixed;
+}
