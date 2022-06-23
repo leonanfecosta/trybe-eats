@@ -58,13 +58,14 @@ function Foods() {
       { foods && foods.slice(0, NUMBER_OF_FOODS).map((food, index) => (
         <CardFood
           key={ food.idMeal }
-          food={ food }
+          id={ food.idMeal }
           srcImg={ food.strMealThumb }
           alt={ food.strMeal }
           name={ food.strMeal }
           dataTestIdCard={ `${index}-recipe-card` }
           dataTestIdImg={ `${index}-card-img` }
           dataTestIdName={ `${index}-card-name` }
+          route="food"
         />
       ))}
       <Footer />

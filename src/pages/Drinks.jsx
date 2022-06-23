@@ -64,13 +64,14 @@ function Drinks() {
           .map((drink, index) => (
             <CardFood
               key={ drink.idDrink }
-              food={ drink }
+              id={ drink.idDrink }
               srcImg={ drink.strDrinkThumb }
               alt={ drink.strDrink }
               name={ drink.strDrink }
               dataTestIdCard={ `${index}-recipe-card` }
               dataTestIdImg={ `${index}-card-img` }
               dataTestIdName={ `${index}-card-name` }
+              route="drink"
             />
           ))}
       <Footer />
