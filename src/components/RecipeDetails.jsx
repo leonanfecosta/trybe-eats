@@ -131,6 +131,11 @@ function RecipeDetails({
           type="button"
           className={ styles.buttonStartRecipe }
           onClick={ () => {
+            // Aqui deve setar o localStorage de doneRecipes
+            // const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+            // if (doneRecipeStorage !== null) {
+            //
+            // }
             if (isMeal) {
               history.push(`/foods/${id}/in-progress`);
             } else {
