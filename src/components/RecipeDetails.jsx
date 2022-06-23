@@ -15,21 +15,28 @@ function RecipeDetails({
   id,
 }) {
   const [isDoneRecipe, setIsDoneRecipe] = useState(false);
-  // const [inProgressRecipe, setInProgressRecipe] = useState(false);
+  const [inProgressRecipe, setInProgressRecipe] = useState(false);
 
   useEffect(() => {
+    // localStorage.setItem('inProgressRecipes', JSON.stringify({
+    //   cocktails: { 17256: [{ id: '17256' }] },
+    //   meals: { 52882: [{ id: '52882' }] },
+    // }));
+    const inProgressRecipeStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipeStorage !== null
+      && `${id}` in {
+        ...inProgressRecipeStorage.cocktails,
+        ...inProgressRecipeStorage.meals,
+      }) {
+      setInProgressRecipe(true);
+    }
+
     // localStorage.setItem('doneRecipes', JSON.stringify([{ id: '17256' }]));
     const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneRecipeStorage !== null
     && doneRecipeStorage.some((recipe) => recipe.id === id)) {
       setIsDoneRecipe(true);
     }
-
-    // const inProgressRecipeStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    // if (inProgressRecipeStorage !== null
-    //   && inProgressRecipeStorage.some((recipe) => recipe.id === id)) {
-    //     setIsDoneRecipe(true);
-    //   }
   }, [id]);
 
   return (
@@ -80,7 +87,16 @@ function RecipeDetails({
           />);
         })}
       </aside>
-      {!isDoneRecipe && (
+      {(!isDoneRecipe && inProgressRecipe) && (
+        <button
+          data-testid="start-recipe-btn"
+          type="button"
+          className={ styles.buttonContinueRecipe }
+        >
+          Continue Recipe
+        </button>
+      )}
+      {(!isDoneRecipe && !inProgressRecipe) && (
         <button
           data-testid="start-recipe-btn"
           type="button"

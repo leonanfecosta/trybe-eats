@@ -10,7 +10,8 @@
   width: 30%;
 }
 
-.buttonStartRecipe {
+.buttonStartRecipe, .buttonContinueRecipe {
   bottom: 0;
+  left: 100px;
   position: fixed;
 }
