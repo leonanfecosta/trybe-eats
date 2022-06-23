@@ -12,7 +12,8 @@ const RADIO_BUTTONS = [
 
 describe('SearchBar', () => {
   it('renders search input, input radios and search button', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
+    history.push('/foods');
     const searchInput = screen.getElementById(SEARCH_INPUT);
     const searchButton = screen.getElementById(SEARCH_BUTTON);
     const topButton = screen.getElementById(TOP_BUTTON);
