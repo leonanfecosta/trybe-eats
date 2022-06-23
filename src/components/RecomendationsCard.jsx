@@ -9,10 +9,7 @@ function RecomendationsCard({ srcImg, alt, name, index }) {
       className={ styles.recomendationCard }
     >
       <p data-testid={ `${index}-recomendation-title` }>{ name }</p>
-      <img
-        src={ srcImg }
-        alt={ alt }
-      />
+      <img src={ srcImg } alt={ alt } />
     </div>
   );
 }

@@ -31,7 +31,6 @@ function RecipeDetailsDrinks(props) {
     getFoodRecommendations().then((response) => {
       const TOTAL_RECOMENDATIONS = 6;
       const responseFilter = response.filter((_, index) => index < TOTAL_RECOMENDATIONS);
-      console.log(responseFilter);
       setMeals(responseFilter);
     });
   }, [id]);
