@@ -7,20 +7,20 @@
 }
 
 .header > div {
+  align-items: center;
   display: flex;
-  justify-content: space-between;
-  margin-block: 10px;
+  gap: 4%;
+  justify-content: flex-start;
+  margin: 10px 1%;
   padding: 5px;
   width: 100%;
-  z-index: 2;
 }
 
 .header > div > h3 {
-  left: 0;
-  margin-inline: auto;
-  position: absolute;
-  right: 0;
   text-align: center;
-  width: 75%;
-  z-index: 1;
+  width: 74%;
+}
+
+.header > div > input {
+  width: 8%;
 }
