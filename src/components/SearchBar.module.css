@@ -1,0 +1,12 @@
+.searchBar {
+  margin-inline: auto;
+  width: 90%;
+}
+
+.searchBar > aside {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto 0;
+  width: 90%;
+}

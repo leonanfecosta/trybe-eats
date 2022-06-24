@@ -19,6 +19,7 @@ export const getFoodByName = async (name) => {
     console.log(error);
   }
 };
+
 export const getFoodByFirstLetter = async (letter) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`;
   try {
@@ -29,6 +30,28 @@ export const getFoodByFirstLetter = async (letter) => {
     console.log(error);
   }
 };
+
+export const getFoodById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.meals[0];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const getFoodRecommendations = async () => {
+//   const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+//   try {
+//     const response = await fetch(URL);
+//     const data = await response.json();
+//     return data.meals;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const getMeals = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';

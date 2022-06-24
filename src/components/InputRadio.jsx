@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function InputRadio({ dataTestid, id, name, value, onClick, labelContent }) {
   return (
-    <label htmlFor={ id }>
+    <label htmlFor={ id } className="form-check">
       <input
         type="radio"
         data-testid={ dataTestid }
@@ -11,6 +11,7 @@ function InputRadio({ dataTestid, id, name, value, onClick, labelContent }) {
         name={ name }
         value={ value }
         onClick={ onClick }
+        className="form-check-input"
       />
       {labelContent}
     </label>

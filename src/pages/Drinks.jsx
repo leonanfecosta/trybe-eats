@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
 import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
+import styles from './Drinks.module.css';
 
 function Drinks() {
   const [filter, setFilter] = useState('All');
@@ -40,14 +41,16 @@ function Drinks() {
   };
 
   return (
-    <div>
+    <div className={ styles.drinks }>
       <Header title="Drinks" showButton route="drink" />
-      <Buttons
-        name="All"
-        dataTestid="All-category-filter"
-        onClick={ fetchDrinks }
-      />
-      {drinksCategories
+      <nav>
+        <Buttons
+          name="All"
+          dataTestid="All-category-filter"
+          onClick={ fetchDrinks }
+          className="btn btn-primary"
+        />
+        {drinksCategories
         && drinksCategories
           .slice(0, NUMBER_OF_CATEGORIES)
           .map((categories) => (
@@ -56,9 +59,12 @@ function Drinks() {
               name={ categories.strCategory }
               dataTestid={ `${categories.strCategory}-category-filter` }
               onClick={ ({ target }) => handleFilter(target.name) }
+              className="btn btn-info"
             />
           ))}
-      {drinks
+      </nav>
+      <main>
+        {drinks
         && drinks
           .slice(0, NUMBER_OF_DRINKS)
           .map((drink, index) => (
@@ -74,6 +80,7 @@ function Drinks() {
               route="drink"
             />
           ))}
+      </main>
       <Footer />
     </div>
   );

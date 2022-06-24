@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
+import styles from './Login.module.css';
 
 function Login() {
   const { password, email, handleChange } = useContext(UserContext);
@@ -24,32 +25,37 @@ function Login() {
   };
 
   return (
-    <div>
-      <input
-        type="email"
-        name="email"
-        value={ email }
-        onChange={ ({ target }) => handleChange(target) }
-        placeholder="Digite seu e-mail"
-        data-testid="email-input"
-      />
-      <input
-        type="password"
-        name="password"
-        value={ password }
-        onChange={ ({ target }) => handleChange(target) }
-        placeholder="Digite sua senha"
-        data-testid="password-input"
-      />
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ validateButton() }
-        onClick={ handleLoginButton }
-      >
-        Enter
-      </button>
-    </div>
+    <form className={ `${styles.login} form-group` }>
+      <div>
+        <input
+          type="email"
+          name="email"
+          value={ email }
+          onChange={ ({ target }) => handleChange(target) }
+          placeholder="Digite seu e-mail"
+          data-testid="email-input"
+          className="form-control"
+        />
+        <input
+          type="password"
+          name="password"
+          value={ password }
+          onChange={ ({ target }) => handleChange(target) }
+          placeholder="Digite sua senha"
+          data-testid="password-input"
+          className="form-control"
+        />
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ validateButton() }
+          onClick={ handleLoginButton }
+          className="btn btn-success"
+        >
+          Enter
+        </button>
+      </div>
+    </form>
   );
 }
 

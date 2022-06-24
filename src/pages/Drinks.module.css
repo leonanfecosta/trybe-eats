@@ -1,0 +1,21 @@
+/* .drinks {
+  background-color: #e1e5eb;
+} */
+
+.drinks > nav {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-evenly;
+  margin: 10px 30px;
+}
+
+.drinks > main {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+  width: 100%;
+}
