@@ -57,13 +57,15 @@ function RecipeDetailsDrinks(props) {
       {!loading && <RecipeDetails
         name={ drink.strDrink }
         image={ drink.strDrinkThumb }
-        category={ drink.strAlcoholic }
+        category={ drink.strCategory }
         instructions={ drink.strInstructions }
         video="null"
         ingredients={ drink.ingredients }
         isMeal={ false }
         recomendation={ meals }
         id={ drink.idDrink }
+        nationality=""
+        alcoholicOrNot={ drink.strAlcoholic }
       />}
 
     </div>

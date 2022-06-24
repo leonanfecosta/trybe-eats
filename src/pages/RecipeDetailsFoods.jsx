@@ -64,8 +64,9 @@ function RecipeDetailsFoods(props) {
         isMeal
         recomendation={ drinks }
         id={ meal.idMeal }
+        nationality={ meal.strArea }
+        alcoholicOrNot=""
       />}
-
     </div>
   );
 }

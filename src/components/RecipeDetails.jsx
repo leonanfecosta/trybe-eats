@@ -6,7 +6,10 @@ import RecomendationsCard from './RecomendationsCard';
 import styles from './RecipeDetails.module.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import localStorageValid from '../services/helpers/localStorageValid';
+import localStorageValidObject from '../services/helpers/localStorageValidObject';
+import setFavoriteLocalStorage from '../services/helpers/setFavoriteLocalStorage';
 
 function RecipeDetails({
   name,
@@ -18,10 +21,12 @@ function RecipeDetails({
   isMeal,
   recomendation,
   id,
+  nationality,
+  alcoholicOrNot,
 }) {
   const [isDoneRecipe, setIsDoneRecipe] = useState(false);
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [wasCopied, setWasCopied] = useState(false);
   const history = useHistory();
 
@@ -30,22 +35,36 @@ function RecipeDetails({
     //   cocktails: { 17256: [{ id: '17256' }] },
     //   meals: { 52882: [{ id: '52882' }] },
     // }));
-    const inProgressRecipeStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipeStorage !== null
-      && `${id}` in {
-        ...inProgressRecipeStorage.cocktails,
-        ...inProgressRecipeStorage.meals,
-      }) {
-      setInProgressRecipe(true);
-    }
+    const inProgressRecipeStorage = localStorageValidObject('inProgressRecipes');
+    setInProgressRecipe(`${id}` in {
+      ...inProgressRecipeStorage.cocktails,
+      ...inProgressRecipeStorage.meals,
+    });
 
     // localStorage.setItem('doneRecipes', JSON.stringify([{ id: '17256' }]));
     const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipeStorage !== null
-    && doneRecipeStorage.some((recipe) => recipe.id === id)) {
-      setIsDoneRecipe(true);
-    }
+
+    // localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: '17256' }]));
+    const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
+    setIsDoneRecipe(doneRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
+
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    const storage = localStorageValid('favoriteRecipes');
+    const favorite = {
+      id,
+      type: isMeal === true ? 'food' : 'drink',
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image,
+    };
+    setFavoriteLocalStorage(isFavorite, favorite, storage, id);
+  };
 
   return (
     <div className={ styles.recipeDetails }>
@@ -57,15 +76,14 @@ function RecipeDetails({
         />
       </div>
       <h3 data-testid="recipe-title">{ name }</h3>
-      <p data-testid="recipe-category">{ category }</p>
+      <p data-testid="recipe-category">{ isMeal ? category : alcoholicOrNot }</p>
 
       <div className={ styles.buttonSection }>
         <input
           type="image"
           data-testid="favorite-btn"
-          // onClick={}
-          src={ whiteHeartIcon }
-          // src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          onClick={ handleFavorite }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
           alt="shareIcon"
         />
 
@@ -164,6 +182,8 @@ RecipeDetails.propTypes = {
   isMeal: PropTypes.bool.isRequired,
   recomendation: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
+  nationality: PropTypes.string.isRequired,
+  alcoholicOrNot: PropTypes.string.isRequired,
 };
 
 export default RecipeDetails;
