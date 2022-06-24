@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from './ExploreFoods.module.css';
+import { getRandomMeal } from '../../services/mealApi';
 
 function ExploreFoods() {
+  const history = useHistory();
   return (
     <div className={ styles.explore }>
       <Header title="Explore Foods" showButton={ false } route="null" />
@@ -27,21 +29,21 @@ function ExploreFoods() {
             By Nationality
           </button>
         </Link>
-        <Link to="/">
-          <button
-            type="button"
-            data-testid="explore-surprise"
-            className="btn btn-info"
-          >
-            Surprise me!
-
-          </button>
-        </Link>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          className="btn btn-info"
+          onClick={ async () => {
+            const { idMeal } = await getRandomMeal();
+            history.push(`/foods/${idMeal}`);
+          } }
+        >
+          Surprise me!
+        </button>
       </nav>
       <Footer />
     </div>
   );
 }
-// Adicionar a rota para o 'Surprise me!'
 
 export default ExploreFoods;
