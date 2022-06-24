@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import FoodContext from '../context/FoodContext';
+import styles from './Header.module.css';
 
 function Header(props) {
   const { title, showButton, route } = props;
@@ -17,22 +18,24 @@ function Header(props) {
   });
 
   return (
-    <div>
-      <input
-        type="image"
-        data-testid="profile-top-btn"
-        onClick={ () => history.push('/profile') }
-        src={ profileIcon }
-        alt="profileIcon"
-      />
-      <h3 data-testid="page-title">{title}</h3>
-      { showButton && <input
-        type="image"
-        data-testid="search-top-btn"
-        onClick={ () => setbuttonVisible(!buttonVisible) }
-        src={ searchIcon }
-        alt="searchIcon"
-      />}
+    <div className={ styles.header }>
+      <div>
+        <input
+          type="image"
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/profile') }
+          src={ profileIcon }
+          alt="profileIcon"
+        />
+        <h3 data-testid="page-title">{title}</h3>
+        { showButton && <input
+          type="image"
+          data-testid="search-top-btn"
+          onClick={ () => setbuttonVisible(!buttonVisible) }
+          src={ searchIcon }
+          alt="searchIcon"
+        />}
+      </div>
       { buttonVisible && <SearchBar /> }
     </div>
   );

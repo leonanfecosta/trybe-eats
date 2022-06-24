@@ -44,10 +44,16 @@ function RecipeDetailsFoods(props) {
   }, [meal]);
 
   return (
-    <div>
-      <h2>Recipe Details</h2>
-      <h4>Foods</h4>
-      {loading && <h4>Loading...</h4>}
+    <div style={ { width: '100%' } }>
+      <h2 style={ { textAlign: 'center' } }>Recipe Details</h2>
+      {/* <h4>Foods</h4> */}
+      {loading && (
+        <h4
+          style={ { textAlign: 'center', marginTop: '100px' } }
+        >
+          Loading...
+        </h4>
+      )}
       {!loading && <RecipeDetails
         name={ meal.strMeal }
         image={ meal.strMealThumb }

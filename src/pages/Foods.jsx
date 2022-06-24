@@ -2,8 +2,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
-import CardFood from '../components/cardFood';
+import CardFood from '../components/CardFood';
 import Buttons from '../components/Buttons';
+import styles from './Foods.module.css';
 
 function Foods() {
   const [filter, setFilter] = useState('All');
@@ -38,36 +39,42 @@ function Foods() {
   };
 
   return (
-    <div>
+    <div className={ styles.foods }>
       <Header title="Foods" showButton route="food" />
-      <Buttons
-        name="All"
-        dataTestid="All-category-filter"
-        onClick={ fetchMeals }
-      />
-      {
-        foodsCategories && foodsCategories
-          .slice(0, NUMBER_OF_CATEGORIES).map((categories) => (
-            <Buttons
-              key={ categories.strCategory }
-              name={ categories.strCategory }
-              dataTestid={ `${categories.strCategory}-category-filter` }
-              onClick={ ({ target }) => handleFilter(target.name) }
-            />))
-      }
-      { foods && foods.slice(0, NUMBER_OF_FOODS).map((food, index) => (
-        <CardFood
-          key={ food.idMeal }
-          id={ food.idMeal }
-          srcImg={ food.strMealThumb }
-          alt={ food.strMeal }
-          name={ food.strMeal }
-          dataTestIdCard={ `${index}-recipe-card` }
-          dataTestIdImg={ `${index}-card-img` }
-          dataTestIdName={ `${index}-card-name` }
-          route="food"
+      <nav>
+        <Buttons
+          name="All"
+          dataTestid="All-category-filter"
+          onClick={ fetchMeals }
+          className="btn btn-primary"
         />
-      ))}
+        {
+          foodsCategories && foodsCategories
+            .slice(0, NUMBER_OF_CATEGORIES).map((categories) => (
+              <Buttons
+                key={ categories.strCategory }
+                name={ categories.strCategory }
+                dataTestid={ `${categories.strCategory}-category-filter` }
+                onClick={ ({ target }) => handleFilter(target.name) }
+                className="btn btn-info"
+              />))
+        }
+      </nav>
+      <main>
+        { foods && foods.slice(0, NUMBER_OF_FOODS).map((food, index) => (
+          <CardFood
+            key={ food.idMeal }
+            id={ food.idMeal }
+            srcImg={ food.strMealThumb }
+            alt={ food.strMeal }
+            name={ food.strMeal }
+            dataTestIdCard={ `${index}-recipe-card` }
+            dataTestIdImg={ `${index}-card-img` }
+            dataTestIdName={ `${index}-card-name` }
+            route="food"
+          />
+        ))}
+      </main>
       <Footer />
     </div>
   );

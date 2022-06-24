@@ -1,0 +1,13 @@
+.profile > h3 {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.profile > nav {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: center;
+  margin-top: 30px;
+}

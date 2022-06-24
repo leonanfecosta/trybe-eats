@@ -49,35 +49,38 @@ function RecipeDetails({
 
   return (
     <div className={ styles.recipeDetails }>
-      <img
-        data-testid="recipe-photo"
-        src={ image }
-        alt={ name }
-        className={ styles.recipeImage }
-      />
-      <h4 data-testid="recipe-title">{ name }</h4>
+      <div className={ styles.recipeImageDiv }>
+        <img
+          data-testid="recipe-photo"
+          src={ image }
+          alt={ name }
+        />
+      </div>
+      <h3 data-testid="recipe-title">{ name }</h3>
       <p data-testid="recipe-category">{ category }</p>
 
-      <input
-        type="image"
-        data-testid="favorite-btn"
-        // onClick={}
-        src={ whiteHeartIcon }
-        // src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-        alt="shareIcon"
-      />
+      <div className={ styles.buttonSection }>
+        <input
+          type="image"
+          data-testid="favorite-btn"
+          // onClick={}
+          src={ whiteHeartIcon }
+          // src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="shareIcon"
+        />
 
-      <input
-        type="image"
-        data-testid="share-btn"
-        onClick={ () => {
-          console.log(history);
-          copy(`http://localhost:3000${history.location.pathname}`);
-          setWasCopied(true);
-        } }
-        src={ shareIcon }
-        alt="shareIcon"
-      />
+        <input
+          type="image"
+          data-testid="share-btn"
+          onClick={ () => {
+            console.log(history);
+            copy(`http://localhost:3000${history.location.pathname}`);
+            setWasCopied(true);
+          } }
+          src={ shareIcon }
+          alt="shareIcon"
+        />
+      </div>
       {wasCopied && <p>Link copied!</p>}
 
       <h4>Ingredients</h4>
@@ -88,17 +91,19 @@ function RecipeDetails({
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{ instructions }</p>
+      <article data-testid="instructions">{ instructions }</article>
 
       {/* Resolução proveniente da thread da turma 20 tribo A -
       https://trybecourse.slack.com/archives/C02T5FNGN07/p1655841646592859 */}
-      {isMeal && <iframe
-        width="420"
-        height="315"
-        src={ `https://www.youtube.com/embed/${video.split('=')[1]}` }
-        title={ name }
-        data-testid="video"
-      />}
+      <div className={ styles.iframeContainer }>
+        {isMeal && <iframe
+          width="420"
+          height="315"
+          src={ `https://www.youtube.com/embed/${video.split('=')[1]}` }
+          title={ name }
+          data-testid="video"
+        />}
+      </div>
       <aside>
         {recomendation.map((recipe, index) => {
           let keyRecipe = 'strMeal';
@@ -112,7 +117,6 @@ function RecipeDetails({
             srcImg={ recipe[`${keyRecipe}Thumb`] }
             alt={ recipe[keyRecipe] }
             name={ recipe[keyRecipe] }
-
           />);
         })}
       </aside>
@@ -120,7 +124,7 @@ function RecipeDetails({
         <button
           data-testid="start-recipe-btn"
           type="button"
-          className={ styles.buttonContinueRecipe }
+          className={ `${styles.buttonContinueRecipe} btn btn-info` }
         >
           Continue Recipe
         </button>
@@ -129,7 +133,7 @@ function RecipeDetails({
         <button
           data-testid="start-recipe-btn"
           type="button"
-          className={ styles.buttonStartRecipe }
+          className={ `${styles.buttonStartRecipe} btn btn-success` }
           onClick={ () => {
             // Aqui deve setar o localStorage de doneRecipes
             // const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));

@@ -12,6 +12,7 @@ import {
   getDrinkByFirstLetter,
 } from '../services/drinkApi';
 import FoodContext from '../context/FoodContext';
+import styles from './SearchBar.module.css';
 
 function SearchBar() {
   const history = useHistory();
@@ -93,7 +94,7 @@ function SearchBar() {
   };
 
   return (
-    <form>
+    <form className={ `${styles.searchBar} form-group` }>
       <input
         type="text"
         placeholder="Search Recipes"
@@ -101,42 +102,48 @@ function SearchBar() {
         name="search-input"
         value={ searchInput }
         onChange={ ({ target }) => setSearchInput(target.value) }
+        className="form-control"
       />
 
-      <InputRadio
-        dataTestid="ingredient-search-radio"
-        id="ingredient-search-radio"
-        name="search-radio"
-        value="ingredientSearch"
-        labelContent="Ingredient"
-        onClick={ ({ target }) => setSearchType(target.value) }
-      />
+      <aside>
+        <div className="form-check">
 
-      <InputRadio
-        dataTestid="name-search-radio"
-        id="name-search-radio"
-        name="search-radio"
-        value="nameSearch"
-        labelContent="Name"
-        onClick={ ({ target }) => setSearchType(target.value) }
-      />
+          <InputRadio
+            dataTestid="ingredient-search-radio"
+            id="ingredient-search-radio"
+            name="search-radio"
+            value="ingredientSearch"
+            labelContent="Ingredient"
+            onClick={ ({ target }) => setSearchType(target.value) }
+          />
 
-      <InputRadio
-        dataTestid="first-letter-search-radio"
-        id="first-letter-search-radio"
-        name="search-radio"
-        value="firstLetterSearch"
-        labelContent="First Letter"
-        onClick={ ({ target }) => setSearchType(target.value) }
-      />
+          <InputRadio
+            dataTestid="name-search-radio"
+            id="name-search-radio"
+            name="search-radio"
+            value="nameSearch"
+            labelContent="Name"
+            onClick={ ({ target }) => setSearchType(target.value) }
+          />
 
-      <button
-        type="submit"
-        data-testid="exec-search-btn"
-        onClick={ handleSetFood }
-      >
-        Search
-      </button>
+          <InputRadio
+            dataTestid="first-letter-search-radio"
+            id="first-letter-search-radio"
+            name="search-radio"
+            value="firstLetterSearch"
+            labelContent="First Letter"
+            onClick={ ({ target }) => setSearchType(target.value) }
+          />
+        </div>
+        <button
+          type="submit"
+          data-testid="exec-search-btn"
+          onClick={ handleSetFood }
+          className="btn btn-secondary"
+        >
+          Search
+        </button>
+      </aside>
     </form>
   );
 }
