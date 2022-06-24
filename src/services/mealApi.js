@@ -42,17 +42,6 @@ export const getFoodById = async (id) => {
   }
 };
 
-// export const getFoodRecommendations = async () => {
-//   const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-//   try {
-//     const response = await fetch(URL);
-//     const data = await response.json();
-//     return data.meals;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const getMeals = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   try {
@@ -81,6 +70,17 @@ export const getMealsByCategory = async (category) => {
     const response = await fetch(URL);
     const data = await response.json();
     return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getRandomMeal = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.meals[0];
   } catch (error) {
     console.log(error);
   }
