@@ -5,11 +5,11 @@
 .recipeDetails > aside {
   align-items: center;
   display: flex;
-  gap: 3%;
+  gap: 5px;
   justify-content: flex-start;
   margin: 20px auto 70px;
   overflow-x: auto;
-  width: 97%;
+  width: 95%;
 }
 
 .recipeDetails > h3, .recipeDetails > p {
