@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './CardFood.module.css';
+import styles from './cardFood.module.css';
 
 function CardFood({
   dataTestIdCard,

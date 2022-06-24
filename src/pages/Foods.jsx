@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
-import CardFood from '../components/CardFood';
+import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
 import styles from './Foods.module.css';
 
