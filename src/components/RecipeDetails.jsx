@@ -47,8 +47,8 @@ function RecipeDetails({
     // localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: '17256' }]));
     const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
     setIsDoneRecipe(doneRecipeStorage?.some((recipe) => recipe.id === id));
+    setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
 
   const handleFavorite = () => {

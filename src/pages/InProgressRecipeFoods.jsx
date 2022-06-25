@@ -52,6 +52,9 @@ function InProgressRecipeFoods(props) {
         instructions={ meal.strInstructions }
         ingredients={ meal.ingredients }
         id={ id }
+        isMeal
+        nationality={ meal.strArea }
+        alcoholicOrNot=""
       />}
     </div>
   );

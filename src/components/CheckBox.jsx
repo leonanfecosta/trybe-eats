@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  addIngredient,
+  removeIngredient,
+} from '../services/helpers/handleInProgressRecipe';
 
 function CheckBox({ name, index, type, id }) {
   const [checked, setChecked] = useState(false);
@@ -26,37 +30,12 @@ function CheckBox({ name, index, type, id }) {
     setChecked(target.checked);
     const { meals, cocktails } = JSON
       .parse(localStorage.getItem('inProgressRecipes')) || {};
-    const setupStorage = {
-      meals: { ...meals },
-      cocktails: { ...cocktails },
-    };
-
-    // console.log(meals, cocktails);
-
-    console.log('antes', setupStorage);
-
-    if (type === 'meals' && target.checked) {
-      setupStorage.meals[id]?.push(name);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(setupStorage));
+    const setupStorage = { meals: { ...meals }, cocktails: { ...cocktails } };
+    if (target.checked) {
+      addIngredient(setupStorage, type, name, id);
+    } else {
+      removeIngredient(setupStorage, type, name, id);
     }
-    if (type === 'cocktails' && target.checked) {
-      setupStorage.cocktails[id]?.push(name);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(setupStorage));
-    }
-    // if (type === 'meals' && !target.checked) {
-    //   const findIndexMeal = setupStorage.meals[id].indexOf(name);
-    //   console.log(setupStorage.meals[id]);
-    //   // setupStorage.meals[id].splice(findIndexMeal, 1);
-    //   // console.log(setupStorage);
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify(setupStorage));
-    // }
-    // if (type === 'cocktails' && !target.checked) {
-    //   const findIndexDrink = setupStorage.meals[id].indexOf(name);
-    //   setupStorage.meals[id].splice(findIndexDrink, 1);
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify(setupStorage));
-    // }
-
-    console.log('depois', setupStorage);
   };
 
   return (
@@ -72,7 +51,7 @@ function CheckBox({ name, index, type, id }) {
         id={ index }
         onChange={ handleChecked }
         value={ checked }
-        checked={ checked }
+        // checked={ checked }
       />
       { name }
     </label>
