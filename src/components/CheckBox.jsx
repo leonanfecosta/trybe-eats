@@ -4,6 +4,7 @@ import {
   addIngredient,
   removeIngredient,
 } from '../services/helpers/handleInProgressRecipe';
+import verifyChecked from '../services/helpers/verifyIngredientsInProgress';
 
 function CheckBox({ name, index, type, id }) {
   const [checked, setChecked] = useState(false);
@@ -29,7 +30,7 @@ function CheckBox({ name, index, type, id }) {
   const handleChecked = ({ target }) => {
     setChecked(target.checked);
     const { meals, cocktails } = JSON
-      .parse(localStorage.getItem('inProgressRecipes')) || {};
+      .parse(localStorage.getItem('inProgressRecipes')) || [];
     const setupStorage = { meals: { ...meals }, cocktails: { ...cocktails } };
     if (target.checked) {
       addIngredient(setupStorage, type, name, id);
@@ -51,7 +52,7 @@ function CheckBox({ name, index, type, id }) {
         id={ index }
         onChange={ handleChecked }
         value={ checked }
-        // checked={ checked }
+        checked={ verifyChecked(name, id) }
       />
       { name }
     </label>
