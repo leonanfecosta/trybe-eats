@@ -20,6 +20,8 @@ import NotFound from './pages/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import UserProvider from './context/UserProvider';
+import InProgressRecipeDrinks from './pages/InProgressRecipeDrinks';
+import InProgressRecipeFoods from './pages/InProgressRecipeFoods';
 
 function App() {
   return (
@@ -49,6 +51,16 @@ function App() {
               exact
               path="/explore/foods/nationalities"
               component={ ExploreFoodsNacionalities }
+            />
+            <Route
+              exact
+              path="/foods/:id/in-progress"
+              component={ InProgressRecipeFoods }
+            />
+            <Route
+              exact
+              path="/drinks/:id/in-progress"
+              component={ InProgressRecipeDrinks }
             />
             <Route exact path="/profile" component={ Profile } />
             <Route exact path="/done-recipes" component={ DoneRecipes } />

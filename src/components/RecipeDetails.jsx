@@ -47,8 +47,8 @@ function RecipeDetails({
     // localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: '17256' }]));
     const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
     setIsDoneRecipe(doneRecipeStorage?.some((recipe) => recipe.id === id));
+    setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
 
   const handleFavorite = () => {
@@ -91,7 +91,6 @@ function RecipeDetails({
           type="image"
           data-testid="share-btn"
           onClick={ () => {
-            console.log(history);
             copy(`http://localhost:3000${history.location.pathname}`);
             setWasCopied(true);
           } }
@@ -153,11 +152,6 @@ function RecipeDetails({
           type="button"
           className={ `${styles.buttonStartRecipe} btn btn-success` }
           onClick={ () => {
-            // Aqui deve setar o localStorage de doneRecipes
-            // const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-            // if (doneRecipeStorage !== null) {
-            //
-            // }
             if (isMeal) {
               history.push(`/foods/${id}/in-progress`);
             } else {
