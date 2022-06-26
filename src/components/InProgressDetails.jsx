@@ -20,6 +20,8 @@ function InProgressDetails({
   nationality,
   alcoholicOrNot,
 }) {
+  const { meals } = JSON
+    .parse(localStorage.getItem('inProgressRecipes')) || [];
   const [isFavorite, setIsFavorite] = useState(false);
   const [wasCopied, setWasCopied] = useState(false);
   // const [showButton, setShowButton] = useState(false);
@@ -118,6 +120,7 @@ function InProgressDetails({
         data-testid="finish-recipe-btn"
         type="button"
         onClick={ () => history.push('/done-recipes') }
+        disabled={ isMeal && meals[id].length !== ingredients.length }
       >
         Finish Recipe
       </button>
