@@ -6,7 +6,7 @@ import {
 } from '../services/helpers/handleInProgressRecipe';
 import verifyChecked from '../services/helpers/verifyIngredientsInProgress';
 
-function CheckBox({ name, index, type, id }) {
+function CheckBox({ name, index, type, id, doneIngredients, setDoneIngredients }) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -19,13 +19,15 @@ function CheckBox({ name, index, type, id }) {
       setChecked(
         inProgressRecipeStorage.meals[id]?.find((ingredient) => ingredient === name),
       );
+      setDoneIngredients(inProgressRecipeStorage.meals[id]);
     }
     if (type === 'cocktails' && 'cocktails' in inProgressRecipeStorage) {
       setChecked(
         inProgressRecipeStorage.cocktails[id]?.find((ingredient) => ingredient === name),
       );
+      setDoneIngredients(inProgressRecipeStorage.cocktails[id]);
     }
-  }, [type, name, id]);
+  }, [type, name, id, setDoneIngredients]);
 
   const handleChecked = ({ target }) => {
     setChecked(target.checked);
@@ -34,8 +36,10 @@ function CheckBox({ name, index, type, id }) {
     const setupStorage = { meals: { ...meals }, cocktails: { ...cocktails } };
     if (target.checked) {
       addIngredient(setupStorage, type, name, id);
+      setDoneIngredients([...doneIngredients, name]);
     } else {
       removeIngredient(setupStorage, type, name, id);
+      setDoneIngredients(doneIngredients.filter((ingredient) => ingredient !== name));
     }
   };
 
@@ -64,6 +68,8 @@ CheckBox.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  setDoneIngredients: PropTypes.func.isRequired,
+  doneIngredients: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default CheckBox;

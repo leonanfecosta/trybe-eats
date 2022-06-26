@@ -20,11 +20,10 @@ function InProgressDetails({
   nationality,
   alcoholicOrNot,
 }) {
-  const { meals } = JSON
-    .parse(localStorage.getItem('inProgressRecipes')) || [];
   const [isFavorite, setIsFavorite] = useState(false);
   const [wasCopied, setWasCopied] = useState(false);
-  // const [showButton, setShowButton] = useState(false);
+  const [doneIngredients, setDoneIngredients] = useState([]);
+  const [btnDisabled, setBtnDisabled] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -32,16 +31,13 @@ function InProgressDetails({
     setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
 
-  // useEffect(() => {
-  //   const { meals, cocktails } = JSON
-  //     .parse(localStorage.getItem('inProgressRecipes')) || {};
-  //   const storage = { meals: { ...meals }, cocktails: { ...cocktails } };
-  //   if (isMeal) {
-  //     setShowButton(storage.meals[id].lenght === ingredients.lenght);
-  //   } else {
-  //     setShowButton(storage.cocktails[id].lenght === ingredients.lenght);
-  //   }
-  // }, [isMeal, id, setShowButton, ingredients]);
+  useEffect(() => {
+    if (doneIngredients && doneIngredients.length === ingredients.length) {
+      setBtnDisabled(false);
+    } else {
+      setBtnDisabled(true);
+    }
+  }, [doneIngredients, setBtnDisabled, ingredients]);
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -102,25 +98,19 @@ function InProgressDetails({
             index={ index }
             type={ isMeal === true ? 'meals' : 'cocktails' }
             id={ id }
+            doneIngredients={ doneIngredients }
+            setDoneIngredients={ setDoneIngredients }
           />
 
         ))}
       </ul>
       <article data-testid="instructions">{ instructions }</article>
-      {/* {showButton && (
-        <button
-          data-testid="finish-recipe-btn"
-          type="button"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Finish Recipe
-        </button>
-      )} */}
       <button
         data-testid="finish-recipe-btn"
         type="button"
         onClick={ () => history.push('/done-recipes') }
-        disabled={ isMeal && meals[id].length !== ingredients.length }
+        // disabled={ isMeal && meals && meals[id].length !== ingredients.length }
+        disabled={ btnDisabled }
       >
         Finish Recipe
       </button>
