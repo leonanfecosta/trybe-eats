@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './RecomendationsCard.module.css';
+import styles from '../styles/RecomendationsCard.module.css';
 
 function RecomendationsCard({ srcImg, alt, name, index }) {
   return (

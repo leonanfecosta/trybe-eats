@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from './Explore.module.css';
+import styles from '../styles/Explore.module.css';
 
 function Explore() {
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from './Profile.module.css';
+import styles from '../styles/Profile.module.css';
 
 function Profile() {
   const history = useHistory();

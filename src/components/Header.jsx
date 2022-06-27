@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import FoodContext from '../context/FoodContext';
-import styles from './Header.module.css';
+import styles from '../styles/Header.module.css';
 
 function Header(props) {
   const { title, showButton, route } = props;

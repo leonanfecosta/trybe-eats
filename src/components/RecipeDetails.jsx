@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import RecomendationsCard from './RecomendationsCard';
-import styles from './RecipeDetails.module.css';
+import styles from '../styles/RecipeDetails.module.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
