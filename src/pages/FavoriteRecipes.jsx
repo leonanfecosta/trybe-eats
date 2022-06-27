@@ -5,40 +5,36 @@ import Buttons from '../components/Buttons';
 
 function FavoriteRecipes() {
   const [favorite, setFavorite] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [favoriteBackup, setFavoriteBackup] = useState(true);
 
   useEffect(() => {
-    const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    setFavorite(favoriteRecipeStorage);
+    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    setFavorite(favoriteStorage);
+    setFavoriteBackup(favoriteStorage);
   }, [setFavorite]);
 
   return (
     <div>
       <Header title="Favorite Recipes" showButton={ false } route="null" />
-      {/* {loading && (
-        <h4
-          style={ { textAlign: 'center', marginTop: '100px' } }
-        >
-          Loading...
-        </h4>
-      )} */}
       <nav>
         <Buttons
           name="All"
           dataTestid="filter-by-all-btn"
-          onClick={ () => console.log('all') }
+          onClick={ () => setFavorite(favoriteBackup) }
           className="btn btn-primary"
         />
         <Buttons
           name="Food"
           dataTestid="filter-by-food-btn"
-          onClick={ () => console.log('food') }
+          onClick={ () => setFavorite(favorite
+            .filter(({ type }) => type === 'food')) }
           className="btn btn-info"
         />
         <Buttons
           name="Drink"
           dataTestid="filter-by-drink-btn"
-          onClick={ () => console.log('drink') }
+          onClick={ () => setFavorite(favorite
+            .filter(({ type }) => type === 'drink')) }
           className="btn btn-info"
         />
       </nav>
