@@ -31,22 +31,14 @@ function RecipeDetails({
   const history = useHistory();
 
   useEffect(() => {
-    // localStorage.setItem('inProgressRecipes', JSON.stringify({
-    //   cocktails: { 17256: [{ id: '17256' }] },
-    //   meals: { 52882: [{ id: '52882' }] },
-    // }));
     const inProgressRecipeStorage = localStorageValidObject('inProgressRecipes');
     setInProgressRecipe(`${id}` in {
       ...inProgressRecipeStorage.cocktails,
       ...inProgressRecipeStorage.meals,
     });
 
-    // localStorage.setItem('doneRecipes', JSON.stringify([{ id: '17256' }]));
     const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-
-    // localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: '17256' }]));
     const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
     setIsDoneRecipe(doneRecipeStorage?.some((recipe) => recipe.id === id));
     setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
