@@ -10,9 +10,6 @@ function CheckBox({ name, index, type, id, doneIngredients, setDoneIngredients }
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    // localStorage.setItem('inProgressRecipes', JSON.stringify({
-    //   meals: { 53063: ['Bread - 2'] },
-    // }));
     const inProgressRecipeStorage = JSON
       .parse(localStorage.getItem('inProgressRecipes')) || {};
     if (type === 'meals' && 'meals' in inProgressRecipeStorage) {
@@ -49,6 +46,7 @@ function CheckBox({ name, index, type, id, doneIngredients, setDoneIngredients }
       data-testid={ `${index}-ingredient-step` }
       style={ checked ? { textDecoration: 'line-through' }
         : { color: 'black' } }
+      className="form-check-label"
     >
       <input
         type="checkbox"
@@ -57,6 +55,7 @@ function CheckBox({ name, index, type, id, doneIngredients, setDoneIngredients }
         onChange={ handleChecked }
         value={ checked }
         checked={ verifyChecked(name, id) }
+        className="form-check-input"
       />
       { name }
     </label>

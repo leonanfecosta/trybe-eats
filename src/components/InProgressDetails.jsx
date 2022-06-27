@@ -8,6 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import CheckBox from './CheckBox';
 import localStorageValid from '../services/helpers/localStorageValid';
 import setFavoriteLocalStorage from '../services/helpers/setFavoriteLocalStorage';
+import styles from '../styles/InProgressDetails.module.css';
 
 function InProgressDetails({
   name,
@@ -55,8 +56,8 @@ function InProgressDetails({
   };
 
   return (
-    <div>
-      <div>
+    <div className={ styles.inProgressDetails }>
+      <div className={ styles.recipeImageDiv }>
         <img
           data-testid="recipe-photo"
           src={ image }
@@ -66,7 +67,7 @@ function InProgressDetails({
       <h3 data-testid="recipe-title">{ name }</h3>
       <p data-testid="recipe-category">{ category }</p>
 
-      <div>
+      <div className={ styles.buttonSection }>
         <input
           type="image"
           data-testid="favorite-btn"
@@ -90,7 +91,7 @@ function InProgressDetails({
       {wasCopied && <p>Link copied!</p>}
 
       <h4>Ingredients</h4>
-      <ul>
+      <form className="form-group form-check">
         {ingredients?.map((ingredient, index) => (
           <CheckBox
             key={ index }
@@ -98,19 +99,19 @@ function InProgressDetails({
             index={ index }
             type={ isMeal === true ? 'meals' : 'cocktails' }
             id={ id }
-            doneIngredients={ doneIngredients }
+            doneIngredients={ doneIngredients === undefined ? [] : doneIngredients }
             setDoneIngredients={ setDoneIngredients }
           />
 
         ))}
-      </ul>
+      </form>
       <article data-testid="instructions">{ instructions }</article>
       <button
         data-testid="finish-recipe-btn"
         type="button"
         onClick={ () => history.push('/done-recipes') }
-        // disabled={ isMeal && meals && meals[id].length !== ingredients.length }
         disabled={ btnDisabled }
+        className={ `${styles.buttonFinishRecipe} btn btn-info` }
       >
         Finish Recipe
       </button>

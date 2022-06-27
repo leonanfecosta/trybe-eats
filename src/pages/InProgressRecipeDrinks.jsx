@@ -36,8 +36,15 @@ function InProgressRecipeDrinks(props) {
   }, [drink]);
 
   return (
-    <div>
-      <h3>In Progress Recipe</h3>
+    <div style={ { width: '100%' } }>
+      <h3
+        style={ {
+          textAlign: 'center',
+          width: '80%',
+          marginInline: 'auto' } }
+      >
+        In Progress Recipe
+      </h3>
       {loading && (
         <h4
           style={ { textAlign: 'center', marginTop: '100px' } }

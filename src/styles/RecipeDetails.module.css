@@ -13,17 +13,34 @@
 }
 
 .recipeDetails > h3, .recipeDetails > p {
-  margin-top: 10px;
+  margin: 10px auto;
   text-align: center;
+  width: 80%;
 }
 
-.recipeDetails > h4, .recipeDetails > article {
-  margin: 10px;
+.recipeDetails > h4 {
+  margin: 20px auto 10px;
+  text-align: center;
+  width: 80%;
+}
+
+.recipeDetails > article {
+  margin: 10px auto;
+  text-align: justify;
+  width: 80%;
+}
+
+.recipeDetails > ul {
+  margin-inline: auto;
+  text-align: justify;
+  width: 80%;
 }
 
 .recipeImageDiv {
   display: flex;
   justify-content: center;
+  margin-inline: auto;
+  width: 80%;
 }
 
 .iframeContainer {

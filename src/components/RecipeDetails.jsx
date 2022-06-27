@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import RecomendationsCard from './RecomendationsCard';
-import styles from './RecipeDetails.module.css';
+import styles from '../styles/RecipeDetails.module.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -31,22 +31,14 @@ function RecipeDetails({
   const history = useHistory();
 
   useEffect(() => {
-    // localStorage.setItem('inProgressRecipes', JSON.stringify({
-    //   cocktails: { 17256: [{ id: '17256' }] },
-    //   meals: { 52882: [{ id: '52882' }] },
-    // }));
     const inProgressRecipeStorage = localStorageValidObject('inProgressRecipes');
     setInProgressRecipe(`${id}` in {
       ...inProgressRecipeStorage.cocktails,
       ...inProgressRecipeStorage.meals,
     });
 
-    // localStorage.setItem('doneRecipes', JSON.stringify([{ id: '17256' }]));
     const doneRecipeStorage = JSON.parse(localStorage.getItem('doneRecipes'));
-
-    // localStorage.setItem('favoriteRecipes', JSON.stringify([{ id: '17256' }]));
     const favoriteRecipeStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
     setIsDoneRecipe(doneRecipeStorage?.some((recipe) => recipe.id === id));
     setIsFavorite(favoriteRecipeStorage?.some((recipe) => recipe.id === id));
   }, [id]);
@@ -64,6 +56,14 @@ function RecipeDetails({
       image,
     };
     setFavoriteLocalStorage(isFavorite, favorite, storage, id);
+  };
+
+  const pushToInProgress = () => {
+    if (isMeal) {
+      history.push(`/foods/${id}/in-progress`);
+    } else {
+      history.push(`/drinks/${id}/in-progress`);
+    }
   };
 
   return (
@@ -142,6 +142,7 @@ function RecipeDetails({
           data-testid="start-recipe-btn"
           type="button"
           className={ `${styles.buttonContinueRecipe} btn btn-info` }
+          onClick={ pushToInProgress }
         >
           Continue Recipe
         </button>
@@ -151,13 +152,7 @@ function RecipeDetails({
           data-testid="start-recipe-btn"
           type="button"
           className={ `${styles.buttonStartRecipe} btn btn-success` }
-          onClick={ () => {
-            if (isMeal) {
-              history.push(`/foods/${id}/in-progress`);
-            } else {
-              history.push(`/drinks/${id}/in-progress`);
-            }
-          } }
+          onClick={ pushToInProgress }
         >
           Start Recipe
         </button>

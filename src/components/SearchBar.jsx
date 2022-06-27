@@ -12,7 +12,7 @@ import {
   getDrinkByFirstLetter,
 } from '../services/drinkApi';
 import FoodContext from '../context/FoodContext';
-import styles from './SearchBar.module.css';
+import styles from '../styles/SearchBar.module.css';
 
 function SearchBar() {
   const history = useHistory();

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
-import styles from './Login.module.css';
+import styles from '../styles/Login.module.css';
 
 function Login() {
   const { password, email, handleChange } = useContext(UserContext);

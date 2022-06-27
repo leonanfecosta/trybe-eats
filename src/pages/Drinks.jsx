@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import FoodContext from '../context/FoodContext';
 import CardFood from '../components/cardFood';
 import Buttons from '../components/Buttons';
-import styles from './Drinks.module.css';
+import styles from '../styles/Drinks.module.css';
 
 function Drinks() {
   const [filter, setFilter] = useState('All');
