@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import styles from './ExploreDrinks.module.css';
+import styles from '../../styles/ExploreDrinks.module.css';
 import { getRandomDrink } from '../../services/drinkApi';
 
 function ExploreDrinks() {

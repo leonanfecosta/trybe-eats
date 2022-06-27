@@ -66,6 +66,14 @@ function RecipeDetails({
     setFavoriteLocalStorage(isFavorite, favorite, storage, id);
   };
 
+  const pushToInProgress = () => {
+    if (isMeal) {
+      history.push(`/foods/${id}/in-progress`);
+    } else {
+      history.push(`/drinks/${id}/in-progress`);
+    }
+  };
+
   return (
     <div className={ styles.recipeDetails }>
       <div className={ styles.recipeImageDiv }>
@@ -142,6 +150,7 @@ function RecipeDetails({
           data-testid="start-recipe-btn"
           type="button"
           className={ `${styles.buttonContinueRecipe} btn btn-info` }
+          onClick={ pushToInProgress }
         >
           Continue Recipe
         </button>
@@ -151,13 +160,7 @@ function RecipeDetails({
           data-testid="start-recipe-btn"
           type="button"
           className={ `${styles.buttonStartRecipe} btn btn-success` }
-          onClick={ () => {
-            if (isMeal) {
-              history.push(`/foods/${id}/in-progress`);
-            } else {
-              history.push(`/drinks/${id}/in-progress`);
-            }
-          } }
+          onClick={ pushToInProgress }
         >
           Start Recipe
         </button>
