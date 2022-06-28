@@ -4,10 +4,10 @@ import InProgressDetails from '../components/InProgressDetails';
 import { getFoodById } from '../services/mealApi';
 
 function InProgressRecipeFoods(props) {
+  const NUMBER_OF_TAGS = 2;
   const [meal, setMeal] = useState({});
   const [loading, setLoading] = useState(true);
   const { match: { params: { id } } } = props;
-
   useEffect(() => {
     getFoodById(id)
       .then((recipe) => {
@@ -62,6 +62,8 @@ function InProgressRecipeFoods(props) {
         isMeal
         nationality={ meal.strArea }
         alcoholicOrNot=""
+        type="food"
+        tags={ meal.strTags ? meal.strTags.split(',').slice(0, NUMBER_OF_TAGS) : [] }
       />}
     </div>
   );

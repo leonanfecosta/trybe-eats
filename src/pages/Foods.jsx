@@ -12,7 +12,9 @@ function Foods() {
   const { foods,
     foodsCategories,
     fetchFoodsByCategory,
-    fetchMeals } = useContext(FoodContext);
+    fetchMeals,
+    ingredient,
+    fetchExplore } = useContext(FoodContext);
   const NUMBER_OF_FOODS = 12;
   const NUMBER_OF_CATEGORIES = 5;
 
@@ -21,8 +23,11 @@ function Foods() {
       if (filter !== 'All') {
         fetchFoodsByCategory(filter);
       }
-      if (filter === 'All' || filter === previousCategory) {
+      if ((filter === 'All' || filter === previousCategory) && ingredient === '') {
         fetchMeals();
+      }
+      if (ingredient !== '') {
+        fetchExplore(ingredient);
       }
     };
     handleCategory();
