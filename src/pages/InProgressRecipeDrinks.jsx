@@ -62,6 +62,9 @@ function InProgressRecipeDrinks(props) {
         isMeal={ false }
         nationality=""
         alcoholicOrNot={ drink.strAlcoholic }
+        type="drink"
+        area={ drink.strArea }
+        tags={ [] }
       />}
     </div>
   );

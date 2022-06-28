@@ -169,7 +169,7 @@ RecipeDetails.propTypes = {
   video: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   isMeal: PropTypes.bool.isRequired,
-  recomendation: PropTypes.arrayOf(PropTypes.object).isRequired,
+  recomendation: PropTypes.arrayOf(PropTypes.shapeOf(PropTypes.string)).isRequired,
   id: PropTypes.string.isRequired,
   nationality: PropTypes.string.isRequired,
   alcoholicOrNot: PropTypes.string.isRequired,
