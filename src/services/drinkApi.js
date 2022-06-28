@@ -9,6 +9,17 @@ export const getDrinkByIngredient = async (ingredient) => {
   }
 };
 
+export const getIngredients = async () => {
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getDrinkByName = async (name) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
   try {
