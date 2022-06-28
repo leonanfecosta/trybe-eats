@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitForElement } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
@@ -57,7 +57,7 @@ describe('teste do FavoriteRecipe', () => {
 
     // console.log(favoriteRecipes[0].name);
     debug();
-    await waitFor(() => expect(screen
+    await waitForElement(() => expect(screen
       .getByTestId('0-horizontal-image')).toBeInTheDocument());
     // expect(screen.getByTestId('0-horizontal-image')).toBeInTheDocument();
   });
