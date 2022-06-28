@@ -5,11 +5,13 @@ import {
   getMeals,
   getMealsCategories,
   getMealsByCategory,
+  getFoodByIngredient,
 } from '../services/mealApi';
 import {
   getDrinks,
   getDrinksCategories,
   getDrinksByCategory,
+  getDrinkByIngredient,
 } from '../services/drinkApi';
 
 function FoodProvider({ children }) {
@@ -18,6 +20,8 @@ function FoodProvider({ children }) {
   const [route, setRoute] = useState('food');
   const [foodsCategories, setFoodCategories] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [ingredient, setIngredient] = useState('');
+  const [ingredientDrink, setIngredientDrink] = useState('');
 
   const fetchMeals = async () => {
     const meals = await getMeals();
@@ -49,6 +53,16 @@ function FoodProvider({ children }) {
     setDrinks(drinksData);
   };
 
+  const fetchExplore = async (element) => {
+    const ingredientsData = await getFoodByIngredient(element);
+    setFood(ingredientsData);
+  };
+
+  const fetchExploreDrinks = async (elementDrink) => {
+    const ingredientsDrinkData = await getDrinkByIngredient(elementDrink);
+    setDrinks(ingredientsDrinkData);
+  };
+
   useEffect(() => {
     fetchMeals();
     fetchDrinks();
@@ -69,6 +83,12 @@ function FoodProvider({ children }) {
     fetchDrinksByCategory,
     fetchDrinks,
     fetchMeals,
+    setIngredient,
+    ingredient,
+    setIngredientDrink,
+    ingredientDrink,
+    fetchExplore,
+    fetchExploreDrinks,
   };
 
   return (

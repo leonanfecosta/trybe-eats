@@ -14,6 +14,8 @@ function Drinks() {
     drinksCategories,
     fetchDrinksByCategory,
     fetchDrinks,
+    ingredientDrink,
+    fetchExploreDrinks,
   } = useContext(FoodContext);
   const NUMBER_OF_DRINKS = 12;
   const NUMBER_OF_CATEGORIES = 5;
@@ -23,8 +25,11 @@ function Drinks() {
       if (filter !== 'All') {
         fetchDrinksByCategory(filter);
       }
-      if (filter === 'All' || filter === previousCategory) {
+      if ((filter === 'All' || filter === previousCategory) && ingredientDrink === '') {
         fetchDrinks();
+      }
+      if (ingredientDrink !== '') {
+        fetchExploreDrinks(ingredientDrink);
       }
     };
     handleCategory();
