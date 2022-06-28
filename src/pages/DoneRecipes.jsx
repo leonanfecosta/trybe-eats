@@ -93,7 +93,7 @@ function DoneRecipes() {
             )
           }
 
-          {recipe.type === 'food' && recipe.tags?.map((tag) => (
+          {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
             <p
               key={ index }
               data-testid={`${index}-${tag}-horizontal-tag`}
