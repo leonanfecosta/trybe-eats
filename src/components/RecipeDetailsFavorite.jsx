@@ -43,7 +43,7 @@ function RecipeDetails({
   }, [isFavorite, setFavorite]);
 
   return (
-    <div className={ styles.recipesFavorites }>
+    <section className={ styles.recipesFavorites }>
       <Link to={ `/${type}s/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
@@ -81,7 +81,7 @@ function RecipeDetails({
         />
       </div>
       {wasCopied && <p>Link copied!</p>}
-    </div>
+    </section>
   );
 }
 
