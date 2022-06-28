@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import FoodContext from '../../context/FoodContext';
 import styles from '../../styles/ExploreDrinksIngredients.module.css';
 import { getIngredients } from '../../services/drinkApi';
 
 function ExploreDrinksIngredients() {
   const [drinks, setDrinks] = useState([]);
+  const { setIngredientDrink } = useContext(FoodContext);
 
   useEffect(() => {
     getIngredients().then((recipe) => {
@@ -18,22 +21,28 @@ function ExploreDrinksIngredients() {
     });
   }, []);
 
+  const onClickLink = (ingredient) => {
+    setIngredientDrink(ingredient);
+  };
+
   return (
     <div>
       <Header title="Explore Ingredients" showButton={ false } route="null" />
       {drinks.map((e, index) => (
-        <div
-          key={ index }
-          data-testid={ `${index}-ingredient-card` }
-          className={ styles.exploreDrinksIngredients }
-        >
-          <p data-testid={ `${index}-card-name` }>{ e }</p>
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ `https://www.thecocktaildb.com/images/ingredients/${e}-Small.png` }
-            alt={ e }
-          />
-        </div>
+        <Link key={ index } to="/drinks" onClick={ () => onClickLink(e) }>
+          <div
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+            className={ styles.exploreDrinksIngredients }
+          >
+            <p data-testid={ `${index}-card-name` }>{ e }</p>
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.thecocktaildb.com/images/ingredients/${e}-Small.png` }
+              alt={ e }
+            />
+          </div>
+        </Link>
       ))}
       <Footer />
     </div>

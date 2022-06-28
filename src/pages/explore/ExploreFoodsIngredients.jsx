@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import FoodContext from '../../context/FoodContext';
 import styles from '../../styles/ExploreFoodsIngredients.module.css';
-import { getIngredients, getFoodByIngredient } from '../../services/mealApi';
+import { getIngredients } from '../../services/mealApi';
 
 function ExploreFoodsIngredients() {
   const [ingredients, setIngredients] = useState([]);
+  const { setIngredient } = useContext(FoodContext);
 
   useEffect(() => {
     getIngredients().then((recipe) => {
@@ -18,27 +21,28 @@ function ExploreFoodsIngredients() {
     });
   }, []);
 
-  const recipesWithIngredient = (ingredient) => {
-    getFoodByIngredient(ingredient).then((recipe) => console.log(recipe));
+  const onClickLink = (ingredient) => {
+    setIngredient(ingredient);
   };
-  recipesWithIngredient('Chicken');
 
   return (
     <div>
       <Header title="Explore Ingredients" showButton={ false } route="null" />
       {ingredients.map((e, index) => (
-        <div
-          key={ index }
-          data-testid={ `${index}-ingredient-card` }
-          className={ styles.exploreFoodsIngredients }
-        >
-          <p data-testid={ `${index}-card-name` }>{ e }</p>
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ `https://www.themealdb.com/images/ingredients/${e}-Small.png` }
-            alt={ e }
-          />
-        </div>
+        <Link key={ index } to="/foods" onClick={ () => onClickLink(e) }>
+          <div
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+            className={ styles.exploreFoodsIngredients }
+          >
+            <p data-testid={ `${index}-card-name` }>{ e }</p>
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.themealdb.com/images/ingredients/${e}-Small.png` }
+              alt={ e }
+            />
+          </div>
+        </Link>
       ))}
       <Footer />
     </div>
