@@ -20,6 +20,8 @@ function InProgressDetails({
   isMeal,
   nationality,
   alcoholicOrNot,
+  type,
+  tags,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [wasCopied, setWasCopied] = useState(false);
@@ -53,6 +55,30 @@ function InProgressDetails({
       image,
     };
     setFavoriteLocalStorage(isFavorite, favorite, storage, id);
+  };
+
+  const doneRecipes = () => {
+    const previousRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const doneDate = `${day}/${month}/${year}`;
+    const recipe = {
+      id,
+      type,
+      name,
+      image,
+      category,
+      nationality,
+      tags,
+      alcoholicOrNot,
+      doneDate,
+    };
+    localStorage.setItem('doneRecipes', JSON
+      .stringify([...previousRecipes, recipe]));
+
+    history.push('/done-recipes');
   };
 
   return (
@@ -109,7 +135,7 @@ function InProgressDetails({
       <button
         data-testid="finish-recipe-btn"
         type="button"
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ doneRecipes }
         disabled={ btnDisabled }
         className={ `${styles.buttonFinishRecipe} btn btn-info` }
       >
@@ -129,6 +155,8 @@ InProgressDetails.propTypes = {
   isMeal: PropTypes.bool.isRequired,
   nationality: PropTypes.string.isRequired,
   alcoholicOrNot: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default InProgressDetails;
