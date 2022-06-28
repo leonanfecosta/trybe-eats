@@ -53,7 +53,7 @@ function DoneRecipes() {
           className="btn btn-info"
         />
       </nav>
-      {completedRecipes?.map((recipe, index) => (
+      {(completedRecipes || []).map((recipe, index) => (
         <div key={ index }>
           <Link to={`${recipe.type}s/${recipe.id}`}>
             <img
