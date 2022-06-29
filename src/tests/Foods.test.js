@@ -59,8 +59,7 @@ describe('teste da tela de Foods', () => {
     expect(fetchMock).toBeCalled();
     history.push(FOODS_PATH);
 
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     DEFAULT_RECIPES_MEALS.forEach((recipe) => {
       expect(screen.getByText(recipe)).toBeInTheDocument();
@@ -76,8 +75,7 @@ describe('teste da tela de Foods', () => {
     expect(fetchMock).toBeCalled();
     history.push(FOODS_PATH);
 
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     RECIPES_MEALS_CATEGORY.forEach((category) => {
       expect(screen.getByText(category)).toBeInTheDocument();
@@ -104,9 +102,7 @@ describe('teste do Componente Search Bar', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push(FOODS_PATH);
-
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     userEvent.click(screen.getByTestId(SEARCH_BUTTON));
     userEvent.type(screen.getByTestId(SEARCH_INPUT), 'chicken');
@@ -124,9 +120,7 @@ describe('teste do Componente Search Bar', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push(FOODS_PATH);
-
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     userEvent.click(screen.getByTestId(SEARCH_BUTTON));
     userEvent.type(screen.getByTestId(SEARCH_INPUT), 'chocolate');
@@ -144,9 +138,7 @@ describe('teste do Componente Search Bar', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push(FOODS_PATH);
-
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     userEvent.click(screen.getByTestId(SEARCH_BUTTON));
     userEvent.type(screen.getByTestId(SEARCH_INPUT), 'w');
@@ -164,9 +156,7 @@ describe('teste do Componente Search Bar', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push(FOODS_PATH);
-
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText(DEFAULT_RECIPES_MEALS[0]));
 
     userEvent.click(screen.getByTestId(SEARCH_BUTTON));
     userEvent.type(screen.getByTestId(SEARCH_INPUT), 'y');
@@ -183,23 +173,18 @@ describe('teste do Componente Search Bar', () => {
     jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
       { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
     ));
-
-    // Utilização do jest para mockar o alert proveniente do Reddit
-    // link: (https://www.reddit.com/r/reactjs/comments/tscxxg/how_do_i
-    // _test_an_alert_using_jest_and_react/)
-    global.alert = jest.fn();
-
+    const alertMock = jest.spyOn(global, 'alert');
+    const TIME_TO_WAIT = 1000;
     const { history } = renderWithRouter(<App />);
     history.push(FOODS_PATH);
-
-    await waitForElement(async () => expect(await screen
-      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+    await waitForElement(() => screen.getByText('Corba'));
 
     userEvent.click(screen.getByTestId(SEARCH_BUTTON));
     userEvent.type(screen.getByTestId(SEARCH_INPUT), 'pedra');
     userEvent.click(screen.getByTestId(SEARCH_NAME));
     userEvent.click(screen.getByTestId(FILTER_BUTTON));
-
-    expect(global.alert).toHaveBeenCalledTimes(1);
+    setTimeout(() => {
+      expect(alertMock).toHaveBeenCalled();
+    }, TIME_TO_WAIT);
   });
 });
