@@ -14,6 +14,8 @@ const URLS = {
   'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list': drinksCategories,
   'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977': mealsById,
   'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997': drinksById,
+  'https://www.themealdb.com/api/json/v1/1/random.php': mealsById,
+  'https://www.thecocktaildb.com/api/json/v1/1/random.php': drinksById,
   'https://www.themealdb.com/api/json/v1/1/list.php?a=list': areas,
   'https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian': mealsByArea,
 };

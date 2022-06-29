@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   screen,
-  waitForElement,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -86,6 +85,8 @@ describe('teste do InProgressRecipeFoods', () => {
 
     const firstIngredient = screen.getByTestId(RECIPE_INGREDIENTS_NAME_AND_MEASURE[0]);
     userEvent.click(firstIngredient);
+    // Utilização do .toHaveStyle proveniente do Stack Overflow
+    // link: https://stackoverflow.com/questions/64638498/how-to-test-styling-using-jest
     expect(firstIngredient).toHaveStyle('text-decoration: line-through;');
     expect(screen.queryByTestId(BUTTON_FINISH_RECIPE)).toBeDisabled();
   });
@@ -105,15 +106,51 @@ describe('teste do InProgressRecipeFoods', () => {
       userEvent.click(screen.getByTestId(dataTest));
     });
 
-    await waitForElement(async () => {
-      expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
-    });
     debug();
+    // await waitForElement(async () => {
+    //   expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
+    // });
+
+    // expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
 
     // userEvent.click(screen.queryByTestId(BUTTON_FINISH_RECIPE));
 
-
-
-
+    // userEvent.click(screen.getByTestId(BUTTON_FINISH_RECIPE));
+    // expect(JSON.parse(localStorage.getItem('doneRecipes'))).toHaveLength(1);
   });
+
+  it('avalia o comportamento do botão de favorito', async () => {
+    const fetchMock = jest
+      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
+        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+      ));
+
+    const { history } = renderWithRouter(<App />);
+    history.push(RECIPE_INPROGRESS_FOODS_PATH);
+    expect(fetchMock).toBeCalled();
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+    const buttonFavorite = screen.getByTestId(RECIPE_FAVORITE_BUTTON);
+    userEvent.click(buttonFavorite);
+    expect(JSON.parse(localStorage.getItem('favoriteRecipes'))).toHaveLength(1);
+    userEvent.click(buttonFavorite);
+    expect(JSON.parse(localStorage.getItem('favoriteRecipes'))).toHaveLength(0);
+  });
+
+  // it('avalia o comportamento do botão de compartilhamento', async () => {
+  //   const fetchMock = jest
+  //     .spyOn(global, 'fetch').mockImplementation(async (URL) => (
+  //       { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+  //     ));
+
+  //   const { history } = renderWithRouter(<App />);
+  //   history.push(RECIPE_INPROGRESS_FOODS_PATH);
+  //   expect(fetchMock).toBeCalled();
+  //   await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+  //   userEvent.click(screen.getByTestId(RECIPE_SHARE_BUTTON));
+  //   await waitForElement(async () => {
+  //     expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
+  //   });
+  // });
 });
