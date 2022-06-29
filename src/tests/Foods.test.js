@@ -94,14 +94,15 @@ describe('teste da tela de Foods', () => {
     await waitForElement(async () => expect(await screen
       .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
   });
+});
 
+describe('teste do Componente Search Bar', () => {
   it('renderiza receitadas pela busca de ingredientes', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-      ));
+    jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
+      { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+    ));
     const { history } = renderWithRouter(<App />);
-    expect(fetchMock).toBeCalled();
+
     history.push(FOODS_PATH);
 
     await waitForElement(async () => expect(await screen
@@ -117,12 +118,11 @@ describe('teste da tela de Foods', () => {
   });
 
   it('renderiza receitadas pela busca de nome', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-      ));
+    jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
+      { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+    ));
     const { history } = renderWithRouter(<App />);
-    expect(fetchMock).toBeCalled();
+
     history.push(FOODS_PATH);
 
     await waitForElement(async () => expect(await screen
@@ -138,12 +138,11 @@ describe('teste da tela de Foods', () => {
   });
 
   it('renderiza receitadas pela busca pela primeira letra', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-      ));
+    jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
+      { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+    ));
     const { history } = renderWithRouter(<App />);
-    expect(fetchMock).toBeCalled();
+
     history.push(FOODS_PATH);
 
     await waitForElement(async () => expect(await screen
@@ -159,12 +158,11 @@ describe('teste da tela de Foods', () => {
   });
 
   it('redireciona para a pagina de detalhes se a API retornar item único', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-      ));
+    jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
+      { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+    ));
     const { history } = renderWithRouter(<App />);
-    expect(fetchMock).toBeCalled();
+
     history.push(FOODS_PATH);
 
     await waitForElement(async () => expect(await screen
@@ -178,6 +176,30 @@ describe('teste da tela de Foods', () => {
     await waitForElement(async () => expect(await screen
       .findByText(mealsByFirstLetterRedirect.meals[0].strMeal)).toBeInTheDocument());
     expect(history.location.pathname)
-      .toBe(`foods/${mealsByFirstLetterRedirect.meals[0].idMeal}`);
+      .toBe(`/foods/${mealsByFirstLetterRedirect.meals[0].idMeal}`);
+  });
+
+  it('avaliar se o alerta é criado', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(async (URL) => (
+      { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+    ));
+
+    // Utilização do jest para mockar o alert proveniente do Reddit
+    // link: (https://www.reddit.com/r/reactjs/comments/tscxxg/how_do_i
+    // _test_an_alert_using_jest_and_react/)
+    global.alert = jest.fn();
+
+    const { history } = renderWithRouter(<App />);
+    history.push(FOODS_PATH);
+
+    await waitForElement(async () => expect(await screen
+      .findByText(DEFAULT_RECIPES_MEALS[0])).toBeInTheDocument());
+
+    userEvent.click(screen.getByTestId(SEARCH_BUTTON));
+    userEvent.type(screen.getByTestId(SEARCH_INPUT), 'pedra');
+    userEvent.click(screen.getByTestId(SEARCH_NAME));
+    userEvent.click(screen.getByTestId(FILTER_BUTTON));
+
+    expect(global.alert).toHaveBeenCalledTimes(1);
   });
 });

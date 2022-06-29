@@ -11,6 +11,7 @@ import mealsByIngredient from './mealsByIngredient';
 import mealsByName from './mealsByName';
 import mealsByFirstLetter from './mealsByFirstLetter';
 import mealsByFirstLetterRedirect from './mealsByFirstLetterRedirect';
+import mealsNotFound from './mealsNotFound';
 
 const URLS = {
   'https://www.themealdb.com/api/json/v1/1/search.php?s=': meals,
@@ -28,6 +29,8 @@ const URLS = {
   'https://www.themealdb.com/api/json/v1/1/search.php?s=chocolate': mealsByName,
   'https://www.themealdb.com/api/json/v1/1/search.php?f=w': mealsByFirstLetter,
   'https://www.themealdb.com/api/json/v1/1/search.php?f=y': mealsByFirstLetterRedirect,
+  'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52871': mealsByFirstLetterRedirect,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=pedra': mealsNotFound,
 };
 
 export default URLS;
