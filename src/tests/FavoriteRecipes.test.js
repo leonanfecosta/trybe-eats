@@ -1,6 +1,10 @@
 import React from 'react';
-import { screen, waitForElement } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import {
+  screen,
+  waitForElement,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
@@ -12,6 +16,22 @@ const ARRAY_FILTERS_BUTTONS = [
   BUTTON_FILTER_ALL,
   BUTTON_FILTER_FOOD,
   BUTTON_FILTER_DRINK,
+];
+
+const FAVORITE_RECIPE_PATH = '/favorite-recipes';
+
+const DATA_TEST_FIRST_CARD = [
+  '0-horizontal-image',
+  '0-horizontal-top-text',
+  '0-horizontal-favorite-btn',
+  '0-horizontal-share-btn',
+];
+
+const DATA_TEST_SECOND_CARD = [
+  '1-horizontal-image',
+  '1-horizontal-top-text',
+  '1-horizontal-favorite-btn',
+  '1-horizontal-share-btn',
 ];
 
 const favoriteRecipes = [
@@ -38,7 +58,7 @@ const favoriteRecipes = [
 describe('teste do FavoriteRecipe', () => {
   it('avalia a renderização dos elementos a partir do App', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/favorite-recipes');
+    history.push(FAVORITE_RECIPE_PATH);
 
     expect(screen.getByText(/Favorite Recipes/i)).toBeInTheDocument();
     ARRAY_FILTERS_BUTTONS.forEach((dataTest) => {
@@ -47,18 +67,83 @@ describe('teste do FavoriteRecipe', () => {
   });
 
   it('avalia a renderização das receitas favoritadas', async () => {
-    const { history, debug } = renderWithRouter(<App />);
-
+    const { history } = renderWithRouter(<App />);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    history.push(FAVORITE_RECIPE_PATH);
 
-    // console.log(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    await waitForElement(async () => {
+      expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+    });
 
-    history.push('/favorite-recipes');
+    [...DATA_TEST_FIRST_CARD, ...DATA_TEST_SECOND_CARD].forEach((dataTest) => {
+      expect(screen.getByTestId(dataTest)).toBeInTheDocument();
+    });
+  });
 
-    // console.log(favoriteRecipes[0].name);
-    debug();
-    await waitForElement(() => expect(screen
-      .getByTestId('0-horizontal-image')).toBeInTheDocument());
-    // expect(screen.getByTestId('0-horizontal-image')).toBeInTheDocument();
+  it('avalia o comportamento dos botão de favoritar', async () => {
+    const { history } = renderWithRouter(<App />);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    history.push(FAVORITE_RECIPE_PATH);
+
+    await waitForElement(async () => {
+      expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId(DATA_TEST_SECOND_CARD[2]));
+    DATA_TEST_FIRST_CARD.forEach((dataTest) => {
+      expect(screen.getByTestId(dataTest)).toBeInTheDocument();
+    });
+
+    await waitForElementToBeRemoved(() => screen.getByTestId(DATA_TEST_SECOND_CARD[0]));
+    DATA_TEST_SECOND_CARD.forEach((dataTest) => {
+      expect(screen.queryByTestId(dataTest)).not.toBeInTheDocument();
+    });
+  });
+
+  // it('avalia o comportamento dos botão de compartilhar', async () => {
+  //   const { history } = renderWithRouter(<App />);
+  //   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  //   history.push(FAVORITE_RECIPE_PATH);
+
+  //   await waitForElement(async () => {
+  //     expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+  //   });
+
+  //   userEvent.click(screen.getByTestId(DATA_TEST_SECOND_CARD[3]));
+  //   await waitForElement(async () => {
+  //     expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
+  //   });
+  // });
+
+  it('avalia o comportamento dos botão de filtrar por comida', async () => {
+    const { history } = renderWithRouter(<App />);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    history.push(FAVORITE_RECIPE_PATH);
+
+    await waitForElement(async () => {
+      expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId(BUTTON_FILTER_FOOD));
+    expect(screen.getByText(favoriteRecipes[0].name)).toBeInTheDocument();
+    expect(screen.queryByText(favoriteRecipes[1].name)).not.toBeInTheDocument();
+  });
+
+  it('avalia o comportamento dos botão de filtrar por bebida e remoção', async () => {
+    const { history } = renderWithRouter(<App />);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    history.push(FAVORITE_RECIPE_PATH);
+
+    await waitForElement(async () => {
+      expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId(BUTTON_FILTER_DRINK));
+    expect(screen.getByText(favoriteRecipes[1].name)).toBeInTheDocument();
+    expect(screen.queryByText(favoriteRecipes[0].name)).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByTestId(BUTTON_FILTER_ALL));
+    expect(screen.getByText(favoriteRecipes[0].name)).toBeInTheDocument();
+    expect(screen.getByText(favoriteRecipes[1].name)).toBeInTheDocument();
   });
 });

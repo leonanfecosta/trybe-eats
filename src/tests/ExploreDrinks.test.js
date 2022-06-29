@@ -26,6 +26,7 @@ describe('Testa os elementos da tela de explorar comidas', () => {
     expect(byIngredient).toBeInTheDocument();
     expect(surpriseMe).toBeInTheDocument();
   });
+
   test('Testa se redireciona a pessoa para a tela de explorar por ingrediente', () => {
     const { history } = renderWithRouter(<App />);
     pathToExploreDrinks();

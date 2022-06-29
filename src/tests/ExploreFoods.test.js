@@ -28,6 +28,7 @@ describe('Testa os elementos da tela de explorar comidas', () => {
     expect(byNationality).toBeInTheDocument();
     expect(surpriseMe).toBeInTheDocument();
   });
+
   test('Testa se redireciona a pessoa para a tela de explorar por ingrediente', () => {
     const { history } = renderWithRouter(<App />);
     pathToExploreFoods();
@@ -36,6 +37,7 @@ describe('Testa os elementos da tela de explorar comidas', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/explore/foods/ingredients');
   });
+
   test('Testa se redireciona a pessoa para a tela de explorar por nacionalidade', () => {
     const { history } = renderWithRouter(<App />);
     pathToExploreFoods();
