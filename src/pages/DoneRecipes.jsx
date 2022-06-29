@@ -53,7 +53,7 @@ function DoneRecipes() {
         />
       </nav>
       {(completedRecipes || []).map((recipe, index) => (
-        <div key={ index }>
+        <div key={ recipe.id }>
           <Link to={ `${recipe.type}s/${recipe.id}` }>
             <img
               src={ recipe.image }
@@ -92,7 +92,7 @@ function DoneRecipes() {
 
           {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
             <p
-              key={ index }
+              key={ tag }
               data-testid={ `${index}-${tag}-horizontal-tag` }
             >
               {tag}
