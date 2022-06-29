@@ -6,12 +6,8 @@ import {
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import meals from './mocks/meals';
-import drinks from './mocks/drinks';
-import mealsCategories from './mocks/mealsCategories';
-import drinksCategories from './mocks/drinksCategories';
 import mealsById from './mocks/mealsById';
-import drinksById from './mocks/drinksById';
+import URLS from './mocks/urls';
 
 const MAX_INGREDIENTS = 20;
 const RECIPE_FOODS_DETAILS_PATH = '/foods/52977';
@@ -49,15 +45,6 @@ const ARRAY_DETAILS_FOODS_DATA_TEST = [
   RECIPE_INSTRUCTIONS,
   RECIPE_VIDEO,
 ];
-
-const URLS = {
-  'https://www.themealdb.com/api/json/v1/1/search.php?s=': meals,
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=': drinks,
-  'https://www.themealdb.com/api/json/v1/1/list.php?c=list': mealsCategories,
-  'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list': drinksCategories,
-  'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977': mealsById,
-  'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997': drinksById,
-};
 
 // Criação de messagem customizada no Jest criada durante a monitoria com o instrutor
 // Especialista Zambelli durante a monitoria, baseado nos links (do Stack OverFlow e Documentação):

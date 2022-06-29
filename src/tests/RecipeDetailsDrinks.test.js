@@ -6,11 +6,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import meals from './mocks/meals';
-import drinks from './mocks/drinks';
-import mealsCategories from './mocks/mealsCategories';
-import drinksCategories from './mocks/drinksCategories';
-import mealsById from './mocks/mealsById';
+import URLS from './mocks/urls';
 import drinksById from './mocks/drinksById';
 
 const MAX_INGREDIENTS = 20;
@@ -22,19 +18,18 @@ const RECIPE_CATEGORY = 'recipe-category';
 const RECIPE_FAVORITE_BUTTON = 'favorite-btn';
 const RECIPE_SHARE_BUTTON = 'share-btn';
 const RECIPE_INSTRUCTIONS = 'instructions';
-const RECIPE_VIDEO = 'video';
 const BUTTON_START_CONTINUE_RECIPE = 'start-recipe-btn';
 
 const RECIPE_INGREDIENTS_NAME_AND_MEASURE = [];
 for (let i = 1; i <= MAX_INGREDIENTS; i += 1) {
   const ingredient = `strIngredient${i}`;
   const measure = `strMeasure${i}`;
-  if (mealsById.meals[0][ingredient] !== ''
-  && mealsById.meals[0][measure] !== ''
-  && mealsById.meals[0][ingredient] !== null
-  && mealsById.meals[0][measure] !== null
-  && mealsById.meals[0][ingredient] !== undefined
-  && mealsById.meals[0][measure] !== undefined) {
+  if (drinksById.drinks[0][ingredient] !== ''
+  && drinksById.drinks[0][measure] !== ''
+  && drinksById.drinks[0][ingredient] !== null
+  && drinksById.drinks[0][measure] !== null
+  && drinksById.drinks[0][ingredient] !== undefined
+  && drinksById.drinks[0][measure] !== undefined) {
     RECIPE_INGREDIENTS_NAME_AND_MEASURE.push(`${i - 1}-ingredient-name-and-measure`);
   }
 }
@@ -47,17 +42,7 @@ const ARRAY_DETAILS_DRINKS_DATA_TEST = [
   RECIPE_SHARE_BUTTON,
   ...RECIPE_INGREDIENTS_NAME_AND_MEASURE,
   RECIPE_INSTRUCTIONS,
-  RECIPE_VIDEO,
 ];
-
-const URLS = {
-  'https://www.themealdb.com/api/json/v1/1/search.php?s=': meals,
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=': drinks,
-  'https://www.themealdb.com/api/json/v1/1/list.php?c=list': mealsCategories,
-  'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list': drinksCategories,
-  'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977': mealsById,
-  'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997': drinksById,
-};
 
 // Criação de messagem customizada no Jest criada durante a monitoria com o instrutor
 // Especialista Zambelli durante a monitoria, baseado nos links (do Stack OverFlow e Documentação):
