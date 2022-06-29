@@ -8,6 +8,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
+const FAVORITE_RECIPE_PATH = '/favorite-recipes';
 const BUTTON_FILTER_ALL = 'filter-by-all-btn';
 const BUTTON_FILTER_FOOD = 'filter-by-food-btn';
 const BUTTON_FILTER_DRINK = 'filter-by-drink-btn';
@@ -17,8 +18,6 @@ const ARRAY_FILTERS_BUTTONS = [
   BUTTON_FILTER_FOOD,
   BUTTON_FILTER_DRINK,
 ];
-
-const FAVORITE_RECIPE_PATH = '/favorite-recipes';
 
 const DATA_TEST_FIRST_CARD = [
   '0-horizontal-image',

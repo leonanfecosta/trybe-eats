@@ -14,7 +14,6 @@ import mealsById from './mocks/mealsById';
 import drinksById from './mocks/drinksById';
 
 const MAX_INGREDIENTS = 20;
-
 const RECIPE_DRINKS_DETAILS_PATH = '/drinks/15997';
 
 const RECIPE_PHOTO = 'recipe-photo';
@@ -22,6 +21,10 @@ const RECIPE_TITLE = 'recipe-title';
 const RECIPE_CATEGORY = 'recipe-category';
 const RECIPE_FAVORITE_BUTTON = 'favorite-btn';
 const RECIPE_SHARE_BUTTON = 'share-btn';
+const RECIPE_INSTRUCTIONS = 'instructions';
+const RECIPE_VIDEO = 'video';
+const BUTTON_START_CONTINUE_RECIPE = 'start-recipe-btn';
+
 const RECIPE_INGREDIENTS_NAME_AND_MEASURE = [];
 for (let i = 1; i <= MAX_INGREDIENTS; i += 1) {
   const ingredient = `strIngredient${i}`;
@@ -35,9 +38,6 @@ for (let i = 1; i <= MAX_INGREDIENTS; i += 1) {
     RECIPE_INGREDIENTS_NAME_AND_MEASURE.push(`${i - 1}-ingredient-name-and-measure`);
   }
 }
-const RECIPE_INSTRUCTIONS = 'instructions';
-const RECIPE_VIDEO = 'video';
-const BUTTON_START_CONTINUE_RECIPE = 'start-recipe-btn';
 
 const ARRAY_DETAILS_DRINKS_DATA_TEST = [
   RECIPE_PHOTO,
@@ -90,8 +90,6 @@ describe('teste do FavoriteDetailsDrinks', () => {
   });
 
   it('avalia o comportamento do botão de favorito', async () => {
-    // Criação de um mock genérico com a utilização de Object Literals proveniente
-    // da monitoria com o instrutor Especialista Zambelli durante a monitoria
     const fetchMock = jest
       .spyOn(global, 'fetch').mockImplementation(async (URL) => (
         { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
@@ -110,8 +108,6 @@ describe('teste do FavoriteDetailsDrinks', () => {
   });
 
   // it('avalia o comportamento dos botão de compartilhar', async () => {
-  //   // Criação de um mock genérico com a utilização de Object Literals proveniente
-  //   // da monitoria com o instrutor Especialista Zambelli durante a monitoria
   //   const fetchMock = jest
   //     .spyOn(global, 'fetch').mockImplementation(async (URL) => (
   //       { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
@@ -130,8 +126,6 @@ describe('teste do FavoriteDetailsDrinks', () => {
   // });
 
   it('avalia a navegação com o botão de Start Recipe', async () => {
-    // Criação de um mock genérico com a utilização de Object Literals proveniente
-    // da monitoria com o instrutor Especialista Zambelli durante a monitoria
     const fetchMock = jest
       .spyOn(global, 'fetch').mockImplementation(async (URL) => (
         { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
