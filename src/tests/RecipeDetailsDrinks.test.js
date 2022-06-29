@@ -11,10 +11,11 @@ import drinks from './mocks/drinks';
 import mealsCategories from './mocks/mealsCategories';
 import drinksCategories from './mocks/drinksCategories';
 import mealsById from './mocks/mealsById';
+import drinksById from './mocks/drinksById';
 
 const MAX_INGREDIENTS = 20;
 
-const RECIPE_FOODS_DETAILS_PATH = '/foods/52977';
+const RECIPE_DRINKS_DETAILS_PATH = '/drinks/15997';
 
 const RECIPE_PHOTO = 'recipe-photo';
 const RECIPE_TITLE = 'recipe-title';
@@ -38,7 +39,7 @@ const RECIPE_INSTRUCTIONS = 'instructions';
 const RECIPE_VIDEO = 'video';
 const BUTTON_START_CONTINUE_RECIPE = 'start-recipe-btn';
 
-const ARRAY_DETAILS_FOODS_DATA_TEST = [
+const ARRAY_DETAILS_DRINKS_DATA_TEST = [
   RECIPE_PHOTO,
   RECIPE_TITLE,
   RECIPE_CATEGORY,
@@ -55,6 +56,7 @@ const URLS = {
   'https://www.themealdb.com/api/json/v1/1/list.php?c=list': mealsCategories,
   'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list': drinksCategories,
   'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977': mealsById,
+  'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997': drinksById,
 };
 
 // Criação de messagem customizada no Jest criada durante a monitoria com o instrutor
@@ -68,7 +70,7 @@ expect.extend({
   },
 });
 
-describe('teste do FavoriteDetailsFoods', () => {
+describe('teste do FavoriteDetailsDrinks', () => {
   it('avalia a renderização correta dos elementos da página', async () => {
     // Criação de um mock genérico com a utilização de Object Literals proveniente
     // da monitoria com o instrutor Especialista Zambelli durante a monitoria
@@ -78,11 +80,11 @@ describe('teste do FavoriteDetailsFoods', () => {
       ));
 
     const { history } = renderWithRouter(<App />);
-    history.push(RECIPE_FOODS_DETAILS_PATH);
+    history.push(RECIPE_DRINKS_DETAILS_PATH);
     expect(fetchMock).toBeCalled();
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
-    ARRAY_DETAILS_FOODS_DATA_TEST.forEach((dataTest) => {
+    ARRAY_DETAILS_DRINKS_DATA_TEST.forEach((dataTest) => {
       expect(screen.getByTestId(dataTest)).toBeInTheDocument();
     });
   });
@@ -96,7 +98,7 @@ describe('teste do FavoriteDetailsFoods', () => {
       ));
 
     const { history } = renderWithRouter(<App />);
-    history.push(RECIPE_FOODS_DETAILS_PATH);
+    history.push(RECIPE_DRINKS_DETAILS_PATH);
     expect(fetchMock).toBeCalled();
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
@@ -116,7 +118,7 @@ describe('teste do FavoriteDetailsFoods', () => {
   //     ));
 
   //   const { history } = renderWithRouter(<App />);
-  //   history.push(RECIPE_FOODS_DETAILS_PATH);
+  //   history.push(RECIPE_DRINKS_DETAILS_PATH);
   //   expect(fetchMock).toBeCalled();
   //   await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
@@ -136,13 +138,13 @@ describe('teste do FavoriteDetailsFoods', () => {
       ));
 
     const { history } = renderWithRouter(<App />);
-    history.push(RECIPE_FOODS_DETAILS_PATH);
+    history.push(RECIPE_DRINKS_DETAILS_PATH);
     expect(fetchMock).toBeCalled();
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
     const buttonStartRecipe = screen.getByTestId(BUTTON_START_CONTINUE_RECIPE);
     userEvent.click(buttonStartRecipe);
     const { location: { pathname } } = history;
-    expect(pathname).toBe('/foods/52977/in-progress');
+    expect(pathname).toBe('/drinks/15997/in-progress');
   });
 });
