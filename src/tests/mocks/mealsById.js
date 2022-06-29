@@ -6,7 +6,7 @@ const mealsById = {
       strDrinkAlternate: null,
       strCategory: 'Side',
       strArea: 'Turkish',
-      strInstructions: 'Pick through your lentils for any foreign debris, rinse them 2 o',
+      strInstructions: 'Instructions goes here',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
       strTags: 'Soup',
       strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',

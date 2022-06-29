@@ -29,7 +29,7 @@ expect.extend({
   },
 });
 
-describe('teste do FavoriteDetailsDrinks', () => {
+describe('teste do ExploreFoodsNacionalities', () => {
   it('avalia a renderização correta dos elementos da página', async () => {
     // Criação de um mock genérico com a utilização de Object Literals proveniente
     // da monitoria com o instrutor Especialista Zambelli durante a monitoria
