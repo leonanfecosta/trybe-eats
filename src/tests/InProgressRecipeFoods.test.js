@@ -9,6 +9,12 @@ import App from '../App';
 import URLS from './mocks/urls';
 import mealsById from './mocks/mealsById';
 
+// Implementação do mock para a biblioteca copy proveniente da thread criada
+// pelo aluno Guilherme Hermenegildo Junior da Turma 12
+// link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+jest.mock('clipboard-copy', () => jest.fn());
+const copy = require('clipboard-copy');
+
 const MAX_INGREDIENTS = 20;
 const RECIPE_INPROGRESS_FOODS_PATH = '/foods/52977/in-progress';
 
@@ -125,20 +131,26 @@ describe('teste do InProgressRecipeFoods', () => {
     expect(JSON.parse(localStorage.getItem('favoriteRecipes'))).toHaveLength(0);
   });
 
-  // it('avalia o comportamento do botão de compartilhamento', async () => {
-  //   const fetchMock = jest
-  //     .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-  //       { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-  //     ));
+  it('avalia o comportamento do botão de compartilhamento', async () => {
+    const fetchMock = jest
+      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
+        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+      ));
 
-  //   const { history } = renderWithRouter(<App />);
-  //   history.push(RECIPE_INPROGRESS_FOODS_PATH);
-  //   expect(fetchMock).toBeCalled();
-  //   await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+    const { history } = renderWithRouter(<App />);
 
-  //   userEvent.click(screen.getByTestId(RECIPE_SHARE_BUTTON));
-  //   await waitForElement(async () => {
-  //     expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
-  //   });
-  // });
+    // Implementação do mock para a biblioteca copy proveniente da thread criada
+    // pelo aluno Guilherme Hermenegildo Junior da Turma 12
+    // link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+    copy.mockImplementation(() => null);
+
+    history.push(RECIPE_INPROGRESS_FOODS_PATH);
+    expect(fetchMock).toBeCalled();
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+    userEvent.click(screen.getByTestId(RECIPE_SHARE_BUTTON));
+    expect(copy).toHaveBeenCalled();
+
+    expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
+  });
 });
