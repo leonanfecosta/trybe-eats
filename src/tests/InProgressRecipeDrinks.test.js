@@ -1,13 +1,10 @@
 import React from 'react';
-import {
-  screen,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 import URLS from './mocks/urls';
-import mealsById from './mocks/mealsById';
+import drinksById from './mocks/drinksById';
 
 // Implementação do mock para a biblioteca copy proveniente da thread criada
 // pelo aluno Guilherme Hermenegildo Junior da Turma 12
@@ -16,7 +13,7 @@ jest.mock('clipboard-copy', () => jest.fn());
 const copy = require('clipboard-copy');
 
 const MAX_INGREDIENTS = 20;
-const RECIPE_INPROGRESS_FOODS_PATH = '/foods/52977/in-progress';
+const RECIPE_INPROGRESS_FOODS_PATH = '/drinks/15997/in-progress';
 
 const RECIPE_PHOTO = 'recipe-photo';
 const RECIPE_TITLE = 'recipe-title';
@@ -30,12 +27,12 @@ const RECIPE_INGREDIENTS_NAME_AND_MEASURE = [];
 for (let i = 1; i <= MAX_INGREDIENTS; i += 1) {
   const ingredient = `strIngredient${i}`;
   const measure = `strMeasure${i}`;
-  if (mealsById.meals[0][ingredient] !== ''
-  && mealsById.meals[0][measure] !== ''
-  && mealsById.meals[0][ingredient] !== null
-  && mealsById.meals[0][measure] !== null
-  && mealsById.meals[0][ingredient] !== undefined
-  && mealsById.meals[0][measure] !== undefined) {
+  if (drinksById.drinks[0][ingredient] !== ''
+  && drinksById.drinks[0][measure] !== ''
+  && drinksById.drinks[0][ingredient] !== null
+  && drinksById.drinks[0][measure] !== null
+  && drinksById.drinks[0][ingredient] !== undefined
+  && drinksById.drinks[0][measure] !== undefined) {
     RECIPE_INGREDIENTS_NAME_AND_MEASURE.push(`${i - 1}-ingredient-step`);
   }
 }
@@ -56,12 +53,13 @@ const ARRAY_DETAILS_FOODS_DATA_TEST = [
 // e (2) https://jestjs.io/docs/expect#expectextendmatchers
 expect.extend({
   validURL: (received, validator) => {
+    console.log(received);
     if (validator[received]) return { message: () => 'URL mockada', pass: true };
     return { message: () => 'URL não mockada', pass: false };
   },
 });
 
-describe('teste do InProgressRecipeFoods', () => {
+describe('teste do InProgressRecipeDrinks', () => {
   it('avalia a renderização correta dos elementos da página', async () => {
     const fetchMock = jest
       .spyOn(global, 'fetch').mockImplementation(async (URL) => (
@@ -94,23 +92,7 @@ describe('teste do InProgressRecipeFoods', () => {
     // Utilização do .toHaveStyle proveniente do Stack Overflow
     // link: https://stackoverflow.com/questions/64638498/how-to-test-styling-using-jest
     expect(firstIngredient).toHaveStyle('text-decoration: line-through;');
-    expect(screen.queryByTestId(BUTTON_FINISH_RECIPE)).toBeDisabled();
-  });
-
-  it('avalia se o botão está habilitado ao marcar todos os checkbox', async () => {
-    const fetchMock = jest
-      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-      ));
-
-    const { history } = renderWithRouter(<App />);
-    history.push(RECIPE_INPROGRESS_FOODS_PATH);
-    expect(fetchMock).toBeCalled();
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
-
-    RECIPE_INGREDIENTS_NAME_AND_MEASURE.forEach((dataTest) => {
-      userEvent.click(screen.getByTestId(dataTest));
-    });
+    expect(screen.queryByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
   });
 
   it('avalia o comportamento do botão de favorito', async () => {

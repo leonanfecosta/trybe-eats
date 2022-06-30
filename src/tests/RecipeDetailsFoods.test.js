@@ -9,6 +9,12 @@ import App from '../App';
 import mealsById from './mocks/mealsById';
 import URLS from './mocks/urls';
 
+// Implementação do mock para a biblioteca copy proveniente da thread criada
+// pelo aluno Guilherme Hermenegildo Junior da Turma 12
+// link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+jest.mock('clipboard-copy', () => jest.fn());
+const copy = require('clipboard-copy');
+
 const MAX_INGREDIENTS = 20;
 const RECIPE_FOODS_DETAILS_PATH = '/foods/52977';
 
@@ -92,23 +98,28 @@ describe('teste do RecipeDetailsFoods', () => {
     expect(JSON.parse(localStorage.getItem('favoriteRecipes'))).toHaveLength(0);
   });
 
-  // it('avalia o comportamento dos botão de compartilhar', async () => {
-  //   const fetchMock = jest
-  //     .spyOn(global, 'fetch').mockImplementation(async (URL) => (
-  //       { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
-  //     ));
+  it('avalia o comportamento dos botão de compartilhar', async () => {
+    const fetchMock = jest
+      .spyOn(global, 'fetch').mockImplementation(async (URL) => (
+        { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
+      ));
 
-  //   const { history } = renderWithRouter(<App />);
-  //   history.push(RECIPE_FOODS_DETAILS_PATH);
-  //   expect(fetchMock).toBeCalled();
-  //   await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+    const { history } = renderWithRouter(<App />);
 
-  //   const buttonShare = screen.getByTestId(RECIPE_SHARE_BUTTON);
-  //   userEvent.click(buttonShare);
-  //   await waitForElement(async () => {
-  //     expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
-  //   });
-  // });
+    // Implementação do mock para a biblioteca copy proveniente da thread criada
+    // pelo aluno Guilherme Hermenegildo Junior da Turma 12
+    // link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+    copy.mockImplementation(() => null);
+
+    history.push(RECIPE_FOODS_DETAILS_PATH);
+    expect(fetchMock).toBeCalled();
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+    userEvent.click(screen.getByTestId(RECIPE_SHARE_BUTTON));
+    expect(copy).toHaveBeenCalled();
+
+    expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
+  });
 
   it('avalia a navegação com o botão de Start Recipe', async () => {
     const fetchMock = jest

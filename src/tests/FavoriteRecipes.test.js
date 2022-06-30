@@ -8,6 +8,12 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
+// Implementação do mock para a biblioteca copy proveniente da thread criada
+// pelo aluno Guilherme Hermenegildo Junior da Turma 12
+// link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+jest.mock('clipboard-copy', () => jest.fn());
+const copy = require('clipboard-copy');
+
 const FAVORITE_RECIPE_PATH = '/favorite-recipes';
 const BUTTON_FILTER_ALL = 'filter-by-all-btn';
 const BUTTON_FILTER_FOOD = 'filter-by-food-btn';
@@ -99,20 +105,25 @@ describe('teste do FavoriteRecipe', () => {
     });
   });
 
-  // it('avalia o comportamento dos botão de compartilhar', async () => {
-  //   const { history } = renderWithRouter(<App />);
-  //   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  //   history.push(FAVORITE_RECIPE_PATH);
+  it('avalia o comportamento dos botão de compartilhar', async () => {
+    const { history } = renderWithRouter(<App />);
 
-  //   await waitForElement(async () => {
-  //     expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
-  //   });
+    // Implementação do mock para a biblioteca copy proveniente da thread criada
+    // pelo aluno Guilherme Hermenegildo Junior da Turma 12
+    // link: https://trybecourse.slack.com/archives/C01T2C18DSM/p1630092847100100
+    copy.mockImplementation(() => null);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    history.push(FAVORITE_RECIPE_PATH);
 
-  //   userEvent.click(screen.getByTestId(DATA_TEST_SECOND_CARD[3]));
-  //   await waitForElement(async () => {
-  //     expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
-  //   });
-  // });
+    await waitForElement(async () => {
+      expect(await screen.findByTestId(DATA_TEST_FIRST_CARD[0])).toBeInTheDocument();
+    });
+
+    userEvent.click(screen.getByTestId(DATA_TEST_SECOND_CARD[3]));
+    expect(copy).toHaveBeenCalled();
+
+    expect(await screen.findByText(/Link copied!/i)).toBeInTheDocument();
+  });
 
   it('avalia o comportamento dos botão de filtrar por comida', async () => {
     const { history } = renderWithRouter(<App />);

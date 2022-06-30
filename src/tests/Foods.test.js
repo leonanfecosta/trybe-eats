@@ -32,13 +32,10 @@ const RECIPES_MEALS_CATEGORY = mealsCategories.meals.slice(0, NUMBER_OF_CATEGORI
   .map(({ strCategory }) => strCategory);
 const RECIPES_BEEFS_MEALS = mealsByCategory.meals.slice(0, NUMBER_OF_MEALS)
   .map(({ strMeal }) => strMeal);
-
 const RECIPES_MEALS_INGREDIENT = mealsByIngredient.meals.slice(0, NUMBER_OF_MEALS)
   .map((({ strMeal }) => strMeal));
-
 const RECIPES_MEALS_NAME = mealsByName.meals.slice(0, NUMBER_OF_MEALS)
   .map((({ strMeal }) => strMeal));
-
 const RECIPES_MEALS_FIRST_LETTER = mealsByFirstLetter.meals.slice(0, NUMBER_OF_MEALS)
   .map((({ strMeal }) => strMeal));
 
