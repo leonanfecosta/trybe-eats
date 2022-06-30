@@ -12,6 +12,9 @@ import mealsByName from './mealsByName';
 import mealsByFirstLetter from './mealsByFirstLetter';
 import mealsByFirstLetterRedirect from './mealsByFirstLetterRedirect';
 import mealsNotFound from './mealsNotFound';
+import drinkIngredient from './drinkIngredient';
+import drinksIngredientsExplore from './drinksIngredientsExplore';
+import mealsIngredient from './mealsIngredient';
 
 const URLS = {
   'https://www.themealdb.com/api/json/v1/1/search.php?s=': meals,
@@ -31,6 +34,10 @@ const URLS = {
   'https://www.themealdb.com/api/json/v1/1/search.php?f=y': mealsByFirstLetterRedirect,
   'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52871': mealsByFirstLetterRedirect,
   'https://www.themealdb.com/api/json/v1/1/search.php?s=pedra': mealsNotFound,
+  'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list': drinkIngredient,
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Light rum': drinksIngredientsExplore,
+  'https://www.themealdb.com/api/json/v1/1/list.php?i=list': mealsIngredient,
+  'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken': mealsByIngredient,
 };
 
 export default URLS;

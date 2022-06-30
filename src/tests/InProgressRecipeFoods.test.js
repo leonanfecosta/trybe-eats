@@ -97,7 +97,7 @@ describe('teste do InProgressRecipeFoods', () => {
         { json: async () => URLS[URL] || expect(URL).validURL(URLS) }
       ));
 
-    const { history, debug } = renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
     history.push(RECIPE_INPROGRESS_FOODS_PATH);
     expect(fetchMock).toBeCalled();
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
@@ -106,7 +106,6 @@ describe('teste do InProgressRecipeFoods', () => {
       userEvent.click(screen.getByTestId(dataTest));
     });
 
-    debug();
     // await waitForElement(async () => {
     //   expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
     // });
