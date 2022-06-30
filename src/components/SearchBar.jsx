@@ -14,6 +14,12 @@ import {
 import FoodContext from '../context/FoodContext';
 import styles from '../styles/SearchBar.module.css';
 
+// Aplicação utilizando node, criado pelo Especialista Gabriel Espindola
+// para resolver o problema do teste com o global.alert
+if (process.env?.NODE_ENV === 'test') {
+  global.alert = (something) => { global.lastAlert = something; };
+}
+
 function SearchBar() {
   const history = useHistory();
   const [searchInput, setSearchInput] = useState('');
@@ -34,7 +40,7 @@ function SearchBar() {
 
   const verifySearch = (search) => {
     if (!search) {
-      return global.alert(
+      global.alert(
         'Sorry, we haven\'t found any recipes for these filters.',
       );
     }

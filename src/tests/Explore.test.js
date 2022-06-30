@@ -24,6 +24,7 @@ describe('Testa os elementos da tela de explorar', () => {
     expect(exploreFoods).toBeInTheDocument();
     expect(exploreDrinks).toBeInTheDocument();
   });
+
   test('Testa se o nomes dos botões são "Explore Foods" e "Explore Drinks', () => {
     renderWithRouter(<App />);
     pathToExplore();
@@ -32,6 +33,7 @@ describe('Testa os elementos da tela de explorar', () => {
     expect(btnExploreFoods).toBeInTheDocument();
     expect(btnExploreDrinks).toBeInTheDocument();
   });
+
   test('Testa se redireciona a pessoa usuária para "Explore Foods"', () => {
     const { history } = renderWithRouter(<App />);
     pathToExplore();
@@ -40,6 +42,7 @@ describe('Testa os elementos da tela de explorar', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/explore/foods');
   });
+
   test('Testa se redireciona a pessoa usuária para "Explore Drinks"', () => {
     const { history } = renderWithRouter(<App />);
     pathToExplore();

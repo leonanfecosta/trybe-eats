@@ -15,6 +15,7 @@ describe('teste do Header', () => {
     expect(screen.getByTestId(HEADER_SEARCH_BUTTON)).toBeInTheDocument();
     expect(screen.getByTestId(TITLE)).toBeInTheDocument();
   });
+
   it('avalia a renderização dos elementos na página Explore', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/explore');

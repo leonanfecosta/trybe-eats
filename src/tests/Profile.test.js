@@ -28,6 +28,7 @@ describe('Testa os elementos da tela de perfil', () => {
     expect(profileFavoriteBtn).toBeInTheDocument();
     expect(profileLogoutBtn).toBeInTheDocument();
   });
+
   test('Testa se redireciona a pessoa usuária para "Favorite Recipes"', () => {
     const { history } = renderWithRouter(<App />);
     pathToProfile();
@@ -36,6 +37,7 @@ describe('Testa os elementos da tela de perfil', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/favorite-recipes');
   });
+
   test('Testa se redireciona a pessoa usuária para "Done Recipes"', () => {
     const { history } = renderWithRouter(<App />);
     pathToProfile();
@@ -44,6 +46,7 @@ describe('Testa os elementos da tela de perfil', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/done-recipes');
   });
+
   test('Testa se redireciona a pessoa usuária para "Logout"', () => {
     const { history } = renderWithRouter(<App />);
     pathToProfile();
@@ -53,6 +56,7 @@ describe('Testa os elementos da tela de perfil', () => {
     expect(pathname).toBe('/');
     expect(localStorage.getItem('user')).toBeNull();
   });
+
   test('Testa se "Email não informado aparece na tela"', () => {
     renderWithRouter(<App />);
     pathToProfile();

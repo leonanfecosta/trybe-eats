@@ -38,18 +38,20 @@ function FavoriteRecipes() {
           className="btn btn-info"
         />
       </nav>
-      {favorite?.map((recipe, index) => (<RecipeDetailsFavorite
-        key={ recipe.id }
-        id={ recipe.id }
-        type={ recipe.type }
-        nationality={ recipe.nationality }
-        category={ recipe.category }
-        alcoholicOrNot={ recipe.alcoholicOrNot }
-        name={ recipe.name }
-        image={ recipe.image }
-        index={ index }
-        setFavorite={ setFavorite }
-      />))}
+      <main>
+        {favorite?.map((recipe, index) => (<RecipeDetailsFavorite
+          key={ recipe.id }
+          id={ recipe.id }
+          type={ recipe.type }
+          nationality={ recipe.nationality }
+          category={ recipe.category }
+          alcoholicOrNot={ recipe.alcoholicOrNot }
+          name={ recipe.name }
+          image={ recipe.image }
+          index={ index }
+          setFavorite={ setFavorite }
+        />))}
+      </main>
     </div>
   );
 }
