@@ -105,17 +105,6 @@ describe('teste do InProgressRecipeFoods', () => {
     RECIPE_INGREDIENTS_NAME_AND_MEASURE.forEach((dataTest) => {
       userEvent.click(screen.getByTestId(dataTest));
     });
-
-    // await waitForElement(async () => {
-    //   expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
-    // });
-
-    // expect(await screen.findByTestId(BUTTON_FINISH_RECIPE)).not.toBeDisabled();
-
-    // userEvent.click(screen.queryByTestId(BUTTON_FINISH_RECIPE));
-
-    // userEvent.click(screen.getByTestId(BUTTON_FINISH_RECIPE));
-    // expect(JSON.parse(localStorage.getItem('doneRecipes'))).toHaveLength(1);
   });
 
   it('avalia o comportamento do botão de favorito', async () => {
