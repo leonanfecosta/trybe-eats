@@ -15,6 +15,11 @@ import mealsNotFound from './mealsNotFound';
 import drinkIngredient from './drinkIngredient';
 import drinksIngredientsExplore from './drinksIngredientsExplore';
 import mealsIngredient from './mealsIngredient';
+import drinkByCategory from './drinksByCategory';
+import drinksByIngredient from './drinksByIngredient';
+import drinksByName from './drinksByName';
+import drinksByFirstLetter from './drinksByFirstLetter';
+import drinksByFirstLetterRedirect from './drinksByFirstLetterRedirect';
 
 const URLS = {
   'https://www.themealdb.com/api/json/v1/1/search.php?s=': meals,
@@ -38,6 +43,11 @@ const URLS = {
   'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Light rum': drinksIngredientsExplore,
   'https://www.themealdb.com/api/json/v1/1/list.php?i=list': mealsIngredient,
   'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken': mealsByIngredient,
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail': drinkByCategory,
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum': drinksByIngredient,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Adam': drinksByName,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=q': drinksByFirstLetter,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Aquamarine': drinksByFirstLetterRedirect,
 };
 
 export default URLS;
