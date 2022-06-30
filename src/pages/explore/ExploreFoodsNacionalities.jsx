@@ -45,31 +45,34 @@ function ExploreFoodsNacionalities() {
           Loading...
         </h4>
       )}
-      {
-        !loading && (
-          <select
-            data-testid="explore-by-nationality-dropdown"
-            onChange={ (event) => setSelect(event.target.value) }
-          >
-            <option
-              name="nacionality"
-              data-testid="All-option"
+      <div className={ `${styles.select} form-group` }>
+        {
+          !loading && (
+            <select
+              data-testid="explore-by-nationality-dropdown"
+              onChange={ (event) => setSelect(event.target.value) }
+              className="form-control-lg"
             >
-              All
-            </option>
-            {nationalities.map((nacionality) => (
               <option
                 name="nacionality"
-                key={ nacionality.strArea }
-                data-testid={ `${nacionality.strArea}-option` }
+                data-testid="All-option"
               >
-                {nacionality.strArea}
-
+                All
               </option>
-            ))}
-          </select>
-        )
-      }
+              {nationalities.map((nacionality) => (
+                <option
+                  name="nacionality"
+                  key={ nacionality.strArea }
+                  data-testid={ `${nacionality.strArea}-option` }
+                >
+                  {nacionality.strArea}
+
+                </option>
+              ))}
+            </select>
+          )
+        }
+      </div>
       {(!loading && mealsArea) && mealsArea.slice(0, NUMBER).map((food, index) => (
         <CardFood
           key={ food.idMeal }

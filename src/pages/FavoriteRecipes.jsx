@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RecipeDetailsFavorite from '../components/RecipeDetailsFavorite';
 import Header from '../components/Header';
 import Buttons from '../components/Buttons';
+import styles from '../styles/FavoriteRecipes.module.css';
 
 function FavoriteRecipes() {
   const [favorite, setFavorite] = useState([]);
@@ -14,7 +15,7 @@ function FavoriteRecipes() {
   }, [setFavorite]);
 
   return (
-    <div>
+    <div className={ styles.favoriteRecipes }>
       <Header title="Favorite Recipes" showButton={ false } route="null" />
       <nav>
         <Buttons
