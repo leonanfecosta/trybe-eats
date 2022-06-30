@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from '../../styles/ExploreFoods.module.css';
 import { getRandomMeal } from '../../services/mealApi';
+import turkey from '../../styles/image/turkey.png';
 
 function ExploreFoods() {
   const history = useHistory();
@@ -15,7 +16,7 @@ function ExploreFoods() {
           <button
             type="button"
             data-testid="explore-by-ingredient"
-            className="btn btn-info"
+            className={ styles.button }
           >
             By Ingredient
           </button>
@@ -24,7 +25,7 @@ function ExploreFoods() {
           <button
             type="button"
             data-testid="explore-by-nationality"
-            className="btn btn-info"
+            className={ styles.button }
           >
             By Nationality
           </button>
@@ -32,7 +33,7 @@ function ExploreFoods() {
         <button
           type="button"
           data-testid="explore-surprise"
-          className="btn btn-info"
+          className={ styles.button }
           onClick={ async () => {
             const { idMeal } = await getRandomMeal();
             history.push(`/foods/${idMeal}`);
@@ -41,6 +42,7 @@ function ExploreFoods() {
           Surprise me!
         </button>
       </nav>
+      <img src={ turkey } alt="turkey" className={ styles.turkey } />
       <Footer />
     </div>
   );

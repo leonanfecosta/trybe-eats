@@ -137,7 +137,7 @@ function InProgressDetails({
         type="button"
         onClick={ doneRecipes }
         disabled={ btnDisabled }
-        className={ `${styles.buttonFinishRecipe} btn btn-info` }
+        className={ styles.buttonFinishRecipe }
       >
         Finish Recipe
       </button>

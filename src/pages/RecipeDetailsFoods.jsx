@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RecipeDetails from '../components/RecipeDetails';
 import { getFoodById } from '../services/mealApi';
 import { getDrinks } from '../services/drinkApi';
+import styles from '../styles/RecipeDetailsFoods.module.css';
 
 function RecipeDetailsFoods(props) {
   const [meal, setMeal] = useState({});
@@ -44,9 +45,8 @@ function RecipeDetailsFoods(props) {
   }, [meal]);
 
   return (
-    <div style={ { width: '100%' } }>
-      <h2 style={ { textAlign: 'center' } }>Recipe Details</h2>
-      {/* <h4>Foods</h4> */}
+    <div className={ styles.recipeDetailsFood }>
+      <h2>Recipe Details</h2>
       {loading && (
         <h4
           style={ { textAlign: 'center', marginTop: '100px' } }

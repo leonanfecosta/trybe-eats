@@ -28,22 +28,24 @@ function ExploreFoodsIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" showButton={ false } route="null" />
-      {ingredients.map((e, index) => (
-        <Link key={ index } to="/foods" onClick={ () => onClickLink(e) }>
-          <div
-            key={ index }
-            data-testid={ `${index}-ingredient-card` }
-            className={ styles.exploreFoodsIngredients }
-          >
-            <p data-testid={ `${index}-card-name` }>{ e }</p>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.themealdb.com/images/ingredients/${e}-Small.png` }
-              alt={ e }
-            />
-          </div>
-        </Link>
-      ))}
+      <main className={ styles.cardContainer }>
+        {ingredients.map((e, index) => (
+          <Link key={ index } to="/foods" onClick={ () => onClickLink(e) }>
+            <div
+              key={ index }
+              data-testid={ `${index}-ingredient-card` }
+              className={ styles.exploreFoodsIngredients }
+            >
+              <p data-testid={ `${index}-card-name` }>{ e }</p>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.themealdb.com/images/ingredients/${e}-Small.png` }
+                alt={ e }
+              />
+            </div>
+          </Link>
+        ))}
+      </main>
       <Footer />
     </div>
   );

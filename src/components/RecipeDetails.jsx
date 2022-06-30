@@ -141,7 +141,7 @@ function RecipeDetails({
         <button
           data-testid="start-recipe-btn"
           type="button"
-          className={ `${styles.buttonContinueRecipe} btn btn-info` }
+          className={ styles.buttonContinueRecipe }
           onClick={ pushToInProgress }
         >
           Continue Recipe
@@ -151,7 +151,7 @@ function RecipeDetails({
         <button
           data-testid="start-recipe-btn"
           type="button"
-          className={ `${styles.buttonStartRecipe} btn btn-success` }
+          className={ styles.buttonStartRecipe }
           onClick={ pushToInProgress }
         >
           Start Recipe

@@ -22,21 +22,21 @@ function FavoriteRecipes() {
           name="All"
           dataTestid="filter-by-all-btn"
           onClick={ () => setFavorite(favoriteBackup) }
-          className="btn btn-primary"
+          className={ styles.allButton }
         />
         <Buttons
           name="Food"
           dataTestid="filter-by-food-btn"
           onClick={ () => setFavorite(favorite
             .filter(({ type }) => type === 'food')) }
-          className="btn btn-info"
+          className={ styles.button }
         />
         <Buttons
           name="Drink"
           dataTestid="filter-by-drink-btn"
           onClick={ () => setFavorite(favorite
             .filter(({ type }) => type === 'drink')) }
-          className="btn btn-info"
+          className={ styles.button }
         />
       </nav>
       <main>

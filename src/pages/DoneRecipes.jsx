@@ -38,19 +38,19 @@ function DoneRecipes() {
           dataTestid="filter-by-all-btn"
           name="All"
           onClick={ handleAllFilter }
-          className="btn btn-primary"
+          className={ styles.allButton }
         />
         <Buttons
           dataTestid="filter-by-food-btn"
           name="Food"
           onClick={ handleFoodFilter }
-          className="btn btn-info"
+          className={ styles.button }
         />
         <Buttons
           dataTestid="filter-by-drink-btn"
           name="Drink"
           onClick={ handleDrinkFilter }
-          className="btn btn-info"
+          className={ styles.button }
         />
       </nav>
       <section>

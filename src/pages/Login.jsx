@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import styles from '../styles/Login.module.css';
+import title from '../styles/image/title.png';
 
 function Login() {
   const { password, email, handleChange } = useContext(UserContext);
@@ -26,6 +27,7 @@ function Login() {
 
   return (
     <form className={ `${styles.login} form-group` }>
+      <img src={ title } alt="title" className={ styles.title } />
       <div>
         <input
           type="email"
@@ -50,7 +52,7 @@ function Login() {
           data-testid="login-submit-btn"
           disabled={ validateButton() }
           onClick={ handleLoginButton }
-          className="btn btn-success"
+          className={ styles.button }
         >
           Enter
         </button>

@@ -2,13 +2,21 @@
   width: 100%;
 }
 
+.cardContainer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-block: 30px;
+  width: 100%;
+}
 
 .select {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-block: 20px;
-  width: 100%;
+  margin: 20px auto;
+  width: 50%;
 }
 
 .select > select {

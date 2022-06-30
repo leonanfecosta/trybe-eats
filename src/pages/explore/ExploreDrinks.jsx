@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import styles from '../../styles/ExploreDrinks.module.css';
 import { getRandomDrink } from '../../services/drinkApi';
+import cocktail from '../../styles/image/cocktail.png';
 
 function ExploreDrinks() {
   const history = useHistory();
@@ -15,7 +16,7 @@ function ExploreDrinks() {
           <button
             type="button"
             data-testid="explore-by-ingredient"
-            className="btn btn-info"
+            className={ styles.button }
           >
             By Ingredient
           </button>
@@ -23,7 +24,7 @@ function ExploreDrinks() {
         <button
           type="button"
           data-testid="explore-surprise"
-          className="btn btn-info"
+          className={ styles.button }
           onClick={ async () => {
             const { idDrink } = await getRandomDrink();
             history.push(`/drinks/${idDrink}`);
@@ -32,6 +33,7 @@ function ExploreDrinks() {
           Surprise me!
         </button>
       </nav>
+      <img src={ cocktail } alt="cocktail" className={ styles.cocktail } />
       <Footer />
     </div>
   );

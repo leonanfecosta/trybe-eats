@@ -36,7 +36,7 @@ function ExploreFoodsNacionalities() {
 
   return (
     <div className={ styles.exploreFoodsNacionalities }>
-      <Header title="Explore Nationalities" showButton route="null" />
+      <Header title="Explore Nationalities" showButton={ false } route="null" />
       <Footer />
       {loading && (
         <h4
@@ -51,7 +51,7 @@ function ExploreFoodsNacionalities() {
             <select
               data-testid="explore-by-nationality-dropdown"
               onChange={ (event) => setSelect(event.target.value) }
-              className="form-control-lg"
+              className="form-control"
             >
               <option
                 name="nacionality"
@@ -73,19 +73,21 @@ function ExploreFoodsNacionalities() {
           )
         }
       </div>
-      {(!loading && mealsArea) && mealsArea.slice(0, NUMBER).map((food, index) => (
-        <CardFood
-          key={ food.idMeal }
-          id={ food.idMeal }
-          srcImg={ food.strMealThumb }
-          alt={ food.strMeal }
-          name={ food.strMeal }
-          dataTestIdCard={ `${index}-recipe-card` }
-          dataTestIdImg={ `${index}-card-img` }
-          dataTestIdName={ `${index}-card-name` }
-          route="food"
-        />
-      ))}
+      <main className={ styles.cardContainer }>
+        {(!loading && mealsArea) && mealsArea.slice(0, NUMBER).map((food, index) => (
+          <CardFood
+            key={ food.idMeal }
+            id={ food.idMeal }
+            srcImg={ food.strMealThumb }
+            alt={ food.strMeal }
+            name={ food.strMeal }
+            dataTestIdCard={ `${index}-recipe-card` }
+            dataTestIdImg={ `${index}-card-img` }
+            dataTestIdName={ `${index}-card-name` }
+            route="food"
+          />
+        ))}
+      </main>
     </div>
   );
 }

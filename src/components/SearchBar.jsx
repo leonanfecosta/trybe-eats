@@ -145,7 +145,7 @@ function SearchBar() {
           type="submit"
           data-testid="exec-search-btn"
           onClick={ handleSetFood }
-          className="btn btn-secondary"
+          className={ styles.buttonFilter }
         >
           Search
         </button>

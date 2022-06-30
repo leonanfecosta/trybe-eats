@@ -19,7 +19,7 @@
 }
 
 .recipeDetails > h4 {
-  margin: 20px auto 10px;
+  margin: 20px auto;
   text-align: center;
   width: 80%;
 }
@@ -34,6 +34,11 @@
   margin-inline: auto;
   text-align: justify;
   width: 80%;
+}
+
+.recipeDetails > ul > li {
+  list-style: none;
+  text-align: center;
 }
 
 .recipeImageDiv {
@@ -55,15 +60,41 @@
 }
 
 .recipeImageDiv > img {
+  border-radius: 10px;
   margin: 20px auto 0;
   width: 40%;
 }
 
-.buttonStartRecipe, .buttonContinueRecipe {
+.buttonStartRecipe {
+  background-color: #e16162;
+  border: none;
+  border-radius: 2px;
   bottom: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
   left: 50%;
+  margin-top: 30px;
+  padding: 8px 32px;
   position: fixed;
   transform: translate(-50%, -50%);
+  width: 200px;
+}
+
+.buttonContinueRecipe {
+  background-color: #f9bc5f;
+  border: none;
+  border-radius: 2px;
+  bottom: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+  left: 50%;
+  margin-top: 30px;
+  padding: 8px 32px;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  width: 200px;
 }
 
 .buttonSection {

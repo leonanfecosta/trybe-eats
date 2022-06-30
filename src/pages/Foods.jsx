@@ -51,7 +51,7 @@ function Foods() {
           name="All"
           dataTestid="All-category-filter"
           onClick={ fetchMeals }
-          className="btn btn-primary"
+          className={ styles.allButton }
         />
         {
           foodsCategories && foodsCategories
@@ -61,7 +61,7 @@ function Foods() {
                 name={ categories.strCategory }
                 dataTestid={ `${categories.strCategory}-category-filter` }
                 onClick={ ({ target }) => handleFilter(target.name) }
-                className="btn btn-info"
+                className={ styles.button }
               />))
         }
       </nav>
