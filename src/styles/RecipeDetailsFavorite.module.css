@@ -24,7 +24,8 @@
 
 .parte1 > a > img {
   border-radius: 10px;
-  width: 80%;
+  margin-left: 20px;
+  width: 100%;
 }
 
 .parte2 {

@@ -30,6 +30,7 @@ function DoneRecipes() {
     const filteredRecipes = recipes.filter((recipe) => recipe.type === 'drink');
     setCompletedRecipes(filteredRecipes);
   };
+
   return (
     <div className={ styles.doneRecipes }>
       <Header title="Done Recipes" showButton={ false } route="null" />
@@ -64,25 +65,17 @@ function DoneRecipes() {
                   data-testid={ `${index}-horizontal-image` }
                 />
               </Link>
-              <input
-                type="image"
-                data-testid={ `${index}-horizontal-share-btn` }
-                onClick={ () => {
-                  copy(`http://localhost:3000/${recipe.type}s/${recipe.id}`);
-                  setWasCopied(true);
-                } }
-                src={ shareIcon }
-                alt="shareIcon"
-                style={ { width: '15px' } }
-              />
-              {wasCopied && (
-                <p
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  style={ { fontSize: '12px' } }
-                >
-                  Link copied!
-                </p>
-              )}
+              <aside>
+                {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
+                  <p
+                    key={ tag }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                    className={ styles.tags }
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </aside>
             </div>
             <div className={ styles.parte2 }>
               <Link to={ `${recipe.type}s/${recipe.id}` }>
@@ -108,21 +101,30 @@ function DoneRecipes() {
                   {recipe.alcoholicOrNot}
                 </p>
               )}
-              <aside>
-                {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
-                  <p
-                    key={ tag }
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                    className={ styles.tags }
-                  >
-                    {tag}
-                  </p>
-                ))}
-              </aside>
 
               <p data-testid={ `${index}-horizontal-done-date` }>
                 {recipe.doneDate}
               </p>
+
+              <input
+                type="image"
+                data-testid={ `${index}-horizontal-share-btn` }
+                onClick={ () => {
+                  copy(`http://localhost:3000/${recipe.type}s/${recipe.id}`);
+                  setWasCopied(true);
+                } }
+                src={ shareIcon }
+                alt="shareIcon"
+                style={ { width: '15px' } }
+              />
+              {wasCopied && (
+                <p
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  style={ { fontSize: '12px' } }
+                >
+                  Link copied!
+                </p>
+              )}
 
             </div>
 

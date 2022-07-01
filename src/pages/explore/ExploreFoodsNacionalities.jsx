@@ -36,7 +36,7 @@ function ExploreFoodsNacionalities() {
 
   return (
     <div className={ styles.exploreFoodsNacionalities }>
-      <Header title="Explore Nationalities" showButton={ false } route="null" />
+      <Header title="Explore Nationalities" showButton route="null" />
       <Footer />
       {loading && (
         <h4

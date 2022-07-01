@@ -54,14 +54,13 @@ function RecipeDetails({
         </Link>
       </div>
       <div className={ styles.parte2 }>
-        <p data-testid={ `${index}-horizontal-top-text` }>
-          { type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot }
-        </p>
 
         <Link to={ `/${type}s/${id}` }>
           <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
         </Link>
-
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          { type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot }
+        </p>
         <div>
           <input
             type="image"
@@ -69,7 +68,7 @@ function RecipeDetails({
             onClick={ handleFavorite }
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
             alt="shareIcon"
-            style={ { width: '15px' } }
+            style={ { width: '15px', marginInline: '8px' } }
           />
 
           <input
