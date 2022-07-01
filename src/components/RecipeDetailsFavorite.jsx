@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
@@ -19,6 +19,7 @@ function RecipeDetails({
   image,
   index,
   setFavorite,
+  setFavoriteBackup,
 }) {
   const [isFavorite, setIsFavorite] = useState(true);
   const [wasCopied, setWasCopied] = useState(false);
@@ -36,11 +37,9 @@ function RecipeDetails({
       image,
     };
     setFavoriteLocalStorage(isFavorite, favorite, storage, id);
-  };
-
-  useEffect(() => {
     setFavorite(JSON.parse(localStorage.getItem('favoriteRecipes')));
-  }, [isFavorite, setFavorite]);
+    setFavoriteBackup(JSON.parse(localStorage.getItem('favoriteRecipes')));
+  };
 
   return (
     <section className={ styles.recipesFavorites }>
@@ -105,6 +104,7 @@ RecipeDetails.propTypes = {
   alcoholicOrNot: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   setFavorite: PropTypes.func.isRequired,
+  setFavoriteBackup: PropTypes.func.isRequired,
 };
 
 export default RecipeDetails;

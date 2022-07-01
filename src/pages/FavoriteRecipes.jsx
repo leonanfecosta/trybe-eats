@@ -6,13 +6,13 @@ import styles from '../styles/FavoriteRecipes.module.css';
 
 function FavoriteRecipes() {
   const [favorite, setFavorite] = useState([]);
-  const [favoriteBackup, setFavoriteBackup] = useState(true);
+  const [favoriteBackup, setFavoriteBackup] = useState([]);
 
   useEffect(() => {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     setFavorite(favoriteStorage);
     setFavoriteBackup(favoriteStorage);
-  }, [setFavorite]);
+  }, []);
 
   return (
     <div className={ styles.favoriteRecipes }>
@@ -27,20 +27,24 @@ function FavoriteRecipes() {
         <Buttons
           name="Food"
           dataTestid="filter-by-food-btn"
-          onClick={ () => setFavorite(favorite
-            .filter(({ type }) => type === 'food')) }
+          onClick={ () => {
+            const filter = favoriteBackup.filter(({ type }) => type === 'food');
+            setFavorite(filter);
+          } }
           className={ styles.button }
         />
         <Buttons
           name="Drink"
           dataTestid="filter-by-drink-btn"
-          onClick={ () => setFavorite(favorite
-            .filter(({ type }) => type === 'drink')) }
+          onClick={ () => {
+            const filter = favoriteBackup.filter(({ type }) => type === 'drink');
+            setFavorite(filter);
+          } }
           className={ styles.button }
         />
       </nav>
       <main>
-        {favorite?.map((recipe, index) => (<RecipeDetailsFavorite
+        {favorite.map((recipe, index) => (<RecipeDetailsFavorite
           key={ recipe.id }
           id={ recipe.id }
           type={ recipe.type }
@@ -51,6 +55,7 @@ function FavoriteRecipes() {
           image={ recipe.image }
           index={ index }
           setFavorite={ setFavorite }
+          setFavoriteBackup={ setFavoriteBackup }
         />))}
       </main>
     </div>
