@@ -44,43 +44,53 @@ function RecipeDetails({
 
   return (
     <section className={ styles.recipesFavorites }>
-      <Link to={ `/${type}s/${id}` }>
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          src={ image }
-          alt={ name }
-          className={ styles.recipesFavoritesImage }
-        />
-      </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        { type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot }
-      </p>
-
-      <Link to={ `/${type}s/${id}` }>
-        <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
-      </Link>
-
-      <div>
-        <input
-          type="image"
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          onClick={ handleFavorite }
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="shareIcon"
-        />
-
-        <input
-          type="image"
-          data-testid={ `${index}-horizontal-share-btn` }
-          onClick={ () => {
-            copy(`http://localhost:3000/${type}s/${id}`);
-            setWasCopied(true);
-          } }
-          src={ shareIcon }
-          alt="shareIcon"
-        />
+      <div className={ styles.parte1 }>
+        <Link to={ `/${type}s/${id}` }>
+          <img
+            data-testid={ `${index}-horizontal-image` }
+            src={ image }
+            alt={ name }
+          />
+        </Link>
       </div>
-      {wasCopied && <p>Link copied!</p>}
+      <div className={ styles.parte2 }>
+
+        <Link to={ `/${type}s/${id}` }>
+          <h4 data-testid={ `${index}-horizontal-name` }>{ name }</h4>
+        </Link>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          { type === 'food' ? `${nationality} - ${category}` : alcoholicOrNot }
+        </p>
+        <div>
+          <input
+            type="image"
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            onClick={ handleFavorite }
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="shareIcon"
+            style={ { width: '15px', marginInline: '8px' } }
+          />
+
+          <input
+            type="image"
+            data-testid={ `${index}-horizontal-share-btn` }
+            onClick={ () => {
+              copy(`http://localhost:3000/${type}s/${id}`);
+              setWasCopied(true);
+            } }
+            src={ shareIcon }
+            alt="shareIcon"
+            style={ { width: '15px', marginInline: '8px' } }
+          />
+        </div>
+        {wasCopied && (
+          <p
+            style={ { fontSize: '12px' } }
+          >
+            Link copied!
+          </p>
+        )}
+      </div>
     </section>
   );
 }

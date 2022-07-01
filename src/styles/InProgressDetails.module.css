@@ -28,6 +28,7 @@
 }
 
 .recipeImageDiv > img {
+  border-radius: 10px;
   margin: 20px auto 0;
   width: 40%;
 }
@@ -42,10 +43,23 @@
 }
 
 .buttonFinishRecipe {
+  background-color: #f9bc5f;
+  border: none;
+  border-radius: 2px;
   bottom: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
   left: 50%;
+  margin-top: 30px;
+  padding: 8px 32px;
   position: fixed;
   transform: translate(-50%, -50%);
+  width: 200px;
+}
+
+.buttonFinishRecipe:disabled {
+  background-color: hsl(36, 93%, 67%, 0.5);
 }
 
 .buttonSection {

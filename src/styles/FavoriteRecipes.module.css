@@ -1,42 +1,42 @@
-.explore {
-  width: 100%;
-}
-
-.explore > nav {
+.favoriteRecipes > nav {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  gap: 50px;
+  gap: 25px;
   justify-content: center;
-  margin: 30px auto 0;
+  margin-inline: auto;
+  padding-block: 20px;
   width: 80%;
 }
 
-.buttonFood {
+.favoriteRecipes > main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.allButton {
   background-color: #e16162;
   border: none;
   border-radius: 2px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
   cursor: pointer;
-  margin-top: 30px;
+  font-size: small;
   padding: 8px 32px;
-  width: 200px;
+  width: 30%;
 }
 
-.buttonDrink {
-  background-color: #e16162;
+.button {
+  background-color: #f9bc5f;
   border: none;
   border-radius: 2px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
   cursor: pointer;
-  margin-top: 30px;
-  padding: 8px 32px;
-  width: 200px;
+  font-size: small;
+  padding-block: 8px;
+  width: 30%;
 }
 
-.foodPlate {
-  margin: 100px 30px 0;
-  width: 300px;
-}

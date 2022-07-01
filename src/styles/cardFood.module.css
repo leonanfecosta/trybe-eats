@@ -12,6 +12,7 @@
 }
 
 .cardFood > img {
+  border-radius: 10px;
   height: 150px;
   width: 150px;
 }

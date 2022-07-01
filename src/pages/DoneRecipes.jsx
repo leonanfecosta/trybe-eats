@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Buttons from '../components/Buttons';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import styles from '../styles/DoneRecipes.module.css';
 
 function DoneRecipes() {
   const [completedRecipes, setCompletedRecipes] = useState([]);
@@ -29,94 +30,107 @@ function DoneRecipes() {
     const filteredRecipes = recipes.filter((recipe) => recipe.type === 'drink');
     setCompletedRecipes(filteredRecipes);
   };
+
   return (
-    <div>
+    <div className={ styles.doneRecipes }>
       <Header title="Done Recipes" showButton={ false } route="null" />
       <nav>
         <Buttons
           dataTestid="filter-by-all-btn"
           name="All"
           onClick={ handleAllFilter }
-          className="btn btn-primary"
+          className={ styles.allButton }
         />
         <Buttons
           dataTestid="filter-by-food-btn"
           name="Food"
           onClick={ handleFoodFilter }
-          className="btn btn-info"
+          className={ styles.button }
         />
         <Buttons
           dataTestid="filter-by-drink-btn"
           name="Drink"
           onClick={ handleDrinkFilter }
-          className="btn btn-info"
+          className={ styles.button }
         />
       </nav>
-      {(completedRecipes || []).map((recipe, index) => (
-        <div key={ recipe.id }>
-          <Link to={ `${recipe.type}s/${recipe.id}` }>
-            <img
-              src={ recipe.image }
-              alt={ recipe.name }
-              style={ { width: '70%' } }
-              data-testid={ `${index}-horizontal-image` }
-            />
-          </Link>
-          <Link to={ `${recipe.type}s/${recipe.id}` }>
-            <h3
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {recipe.name}
-            </h3>
-          </Link>
+      <section>
+        {(completedRecipes || []).map((recipe, index) => (
+          <div key={ recipe.id } className={ styles.doneRecipesCards }>
+            <div className={ styles.parte1 }>
+              <Link to={ `${recipe.type}s/${recipe.id}` }>
+                <img
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                  data-testid={ `${index}-horizontal-image` }
+                />
+              </Link>
+              <aside>
+                {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
+                  <p
+                    key={ tag }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                    className={ styles.tags }
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </aside>
+            </div>
+            <div className={ styles.parte2 }>
+              <Link to={ `${recipe.type}s/${recipe.id}` }>
+                <h4
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  {recipe.name}
+                </h4>
+              </Link>
 
-          <p data-testid={ `${index}-horizontal-done-date` }>
-            {recipe.doneDate}
-          </p>
+              {recipe.type === 'food' && (
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {`${recipe.nationality} - ${recipe.category}`}
+                </p>
+              )}
 
-          {recipe.type === 'food' && (
-            <p
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              {`${recipe.nationality} - ${recipe.category}`}
-            </p>
-          )}
+              {recipe.type === 'drink' && (
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {recipe.alcoholicOrNot}
+                </p>
+              )}
 
-          {recipe.type === 'drink' && (
-            <p
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              {recipe.alcoholicOrNot}
-            </p>
-          )}
+              <p data-testid={ `${index}-horizontal-done-date` }>
+                {recipe.doneDate}
+              </p>
 
-          {recipe.type === 'food' && (recipe.tags || []).map((tag) => (
-            <p
-              key={ tag }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
-            </p>
-          ))}
+              <input
+                type="image"
+                data-testid={ `${index}-horizontal-share-btn` }
+                onClick={ () => {
+                  copy(`http://localhost:3000/${recipe.type}s/${recipe.id}`);
+                  setWasCopied(true);
+                } }
+                src={ shareIcon }
+                alt="shareIcon"
+                style={ { width: '15px' } }
+              />
+              {wasCopied && (
+                <p
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  style={ { fontSize: '12px' } }
+                >
+                  Link copied!
+                </p>
+              )}
 
-          <input
-            type="image"
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => {
-              copy(`http://localhost:3000/${recipe.type}s/${recipe.id}`);
-              setWasCopied(true);
-            } }
-            src={ shareIcon }
-            alt="shareIcon"
-          />
-          {wasCopied && (
-            <p data-testid={ `${index}-horizontal-share-btn` }>
-              Link copied!
-            </p>
-          )}
+            </div>
 
-        </div>
-      ))}
+          </div>
+        ))}
+      </section>
     </div>
   );
 }

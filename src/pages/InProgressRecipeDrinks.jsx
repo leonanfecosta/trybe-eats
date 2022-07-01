@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InProgressDetails from '../components/InProgressDetails';
 import { getDrinkById } from '../services/drinkApi';
+import styles from '../styles/InProgressRecipeDrinks.module.css';
 
 function InProgressRecipeDrinks(props) {
   const [drink, setDrink] = useState({});
@@ -36,15 +37,8 @@ function InProgressRecipeDrinks(props) {
   }, [drink]);
 
   return (
-    <div style={ { width: '100%' } }>
-      <h3
-        style={ {
-          textAlign: 'center',
-          width: '80%',
-          marginInline: 'auto' } }
-      >
-        In Progress Recipe
-      </h3>
+    <div className={ styles.inProgressRecipeDrinks }>
+      <h3 className={ styles.title }>In Progress Recipe</h3>
       {loading && (
         <h4
           style={ { textAlign: 'center', marginTop: '100px' } }

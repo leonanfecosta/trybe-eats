@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import InProgressDetails from '../components/InProgressDetails';
 import { getFoodById } from '../services/mealApi';
+import styles from '../styles/InProgressRecipeFoods.module.css';
 
 function InProgressRecipeFoods(props) {
   const NUMBER_OF_TAGS = 2;
@@ -36,15 +37,8 @@ function InProgressRecipeFoods(props) {
   }, [meal]);
 
   return (
-    <div style={ { width: '100%' } }>
-      <h3
-        style={ {
-          textAlign: 'center',
-          width: '80%',
-          marginInline: 'auto' } }
-      >
-        In Progress Recipe
-      </h3>
+    <div className={ styles.inProgressRecipeFoods }>
+      <h3 className={ styles.title }>In Progress Recipe</h3>
       {loading && (
         <h4
           style={ { textAlign: 'center', marginTop: '100px' } }

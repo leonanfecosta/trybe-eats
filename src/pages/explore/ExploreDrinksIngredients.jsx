@@ -28,22 +28,24 @@ function ExploreDrinksIngredients() {
   return (
     <div>
       <Header title="Explore Ingredients" showButton={ false } route="null" />
-      {drinks.map((e, index) => (
-        <Link key={ index } to="/drinks" onClick={ () => onClickLink(e) }>
-          <div
-            key={ index }
-            data-testid={ `${index}-ingredient-card` }
-            className={ styles.exploreDrinksIngredients }
-          >
-            <p data-testid={ `${index}-card-name` }>{ e }</p>
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.thecocktaildb.com/images/ingredients/${e}-Small.png` }
-              alt={ e }
-            />
-          </div>
-        </Link>
-      ))}
+      <main className={ styles.cardContainer }>
+        {drinks.map((e, index) => (
+          <Link key={ index } to="/drinks" onClick={ () => onClickLink(e) }>
+            <div
+              key={ index }
+              data-testid={ `${index}-ingredient-card` }
+              className={ styles.exploreDrinksIngredients }
+            >
+              <p data-testid={ `${index}-card-name` }>{ e }</p>
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${e}-Small.png` }
+                alt={ e }
+              />
+            </div>
+          </Link>
+        ))}
+      </main>
       <Footer />
     </div>
   );

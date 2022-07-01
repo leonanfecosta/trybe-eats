@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styles from '../styles/Profile.module.css';
+import profile from '../styles/image/profile_photo.png';
 
 function Profile() {
   const history = useHistory();
@@ -21,16 +22,23 @@ function Profile() {
   return (
     <div className={ styles.profile }>
       <Header title="Profile" showButton={ false } route="null" />
-      <h3 data-testid="profile-email">
-        { profileEmail ? profileEmail.email : 'Email não informado' }
-      </h3>
+      <section>
+        <img
+          src={ profile }
+          alt="profile"
+          className={ styles.profileImage }
+        />
+        <h4 data-testid="profile-email">
+          { profileEmail ? profileEmail.email : 'Email não informado' }
+        </h4>
+      </section>
       <nav>
 
         <Link to="/done-recipes">
           <button
             data-testid="profile-done-btn"
             type="button"
-            className="btn btn-info"
+            className={ styles.button }
           >
             Done Recipes
           </button>
@@ -39,7 +47,7 @@ function Profile() {
           <button
             data-testid="profile-favorite-btn"
             type="button"
-            className="btn btn-info"
+            className={ styles.button }
           >
             Favorite Recipes
           </button>
@@ -48,7 +56,7 @@ function Profile() {
           data-testid="profile-logout-btn"
           type="button"
           onClick={ logoutBtn }
-          className="btn btn-info"
+          className={ styles.button }
         >
           Logout
         </button>
