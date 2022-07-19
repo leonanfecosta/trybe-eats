@@ -1,4 +1,4 @@
-# Front End Online Store
+# Trybe Eats
 ###### by _[Leonan Costa](https://www.linkedin.com/in/leonanfecosta/)_
 
 ## :page_with_curl: Sobre
